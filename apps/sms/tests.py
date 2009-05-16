@@ -5,6 +5,8 @@ from django.test import TestCase
 from datetime import datetime
 from app import App
 
+from apps.sms.models.base import ReportMalnutrition, Case
+
 def years_months(dt):
     dt = datetime.strptime(dt, "%d/%m/%Y").date()
     now = datetime.now().date()
@@ -15,7 +17,7 @@ def years_months(dt):
 loaded = False
 class TestApp (TestScript):
     apps = (App,)
-    fixtures = ("base.json", "auth.json")
+    fixtures = ("base.json", "auth.json", "observations.json")
     
     def setUp (self):
         # since the database is not nuked, there's no point in reloading these every time
@@ -60,3 +62,20 @@ class TestApp (TestScript):
         1234567 > NEW 70 1201 M 19102008 123124124
         1234567 < That child already exists.
     """ % (years_months("19/10/2008")[1])
+    
+    test_02_report = """
+        # test reporting
+        1234567 > REPORT 68 25.2 95.5 8.3 N Y
+        1234567 < That child is not registered.
+        
+        1234567 > REPORT 70 25.2 95.5 8.3 N Y
+    """
+    
+    def test_02_report_test(self):
+        case = Case.objects.get(ref_id=70)
+        report = ReportMalnutrition.objects.get(case=case)
+        dct = report.get_dictionary()
+        assert report.weight == 25.2
+        assert report.height == 95.5
+        assert report.stunted == False
+        assert report.weight_for_height == "100%-85%"

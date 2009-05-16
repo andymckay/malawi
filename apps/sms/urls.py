@@ -5,5 +5,6 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^join (\S+) (\S+) (\d+)', "apps.sms.views.joining.join",),
-    (r'^new (.*)', "apps.sms.views.reporting.report"),
+    (r'^new (.*)', "apps.sms.views.reporting.new"),
+    (r'^report (.*)', "apps.sms.views.reporting.report")
 )

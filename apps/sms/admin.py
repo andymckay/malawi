@@ -7,7 +7,7 @@ class CaseAdmin(admin.ModelAdmin):
     
 admin.site.register(Case, CaseAdmin)
 admin.site.register(Provider)
-admin.site.register(Zone)
+
 admin.site.register(Facility)
 
 class MessageLogAdmin(admin.ModelAdmin):
@@ -15,3 +15,8 @@ class MessageLogAdmin(admin.ModelAdmin):
     list_filter = ("was_handled",)
     
 admin.site.register(MessageLog, MessageLogAdmin)
+
+class ZoneAdmin(admin.ModelAdmin):
+    list_display = ("name", "head", "get_category_display")
+
+admin.site.register(Zone, ZoneAdmin)

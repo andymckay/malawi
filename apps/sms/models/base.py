@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 from malnutrition.models import zone, case, facility
 from malnutrition.models import provider, log, report
 
+# basic patient and zone information
 class Zone(zone.Zone):
     class Meta(zone.Zone.Meta):
         app_label = "sms"
@@ -33,11 +34,20 @@ class Case(case.Case):
             'ref_id': self.ref_id
         }
         return dct
-            
+
+# basic report information
+class Observation(report.Observation):
+    class Meta(report.Observation.Meta):
+        app_label = "sms"
+ 
 class Report(report.Report):
     """ A generic report """
-    
     class Meta(report.Report.Meta):
+        app_label = "sms"
+
+class ReportMalnutrition(report.ReportMalnutrition):
+    """ A generic report """
+    class Meta(report.ReportMalnutrition.Meta):
         app_label = "sms"
 
 class MessageLog(log.MessageLog):

@@ -1,0 +1,1934 @@
+[
+  {
+    "pk": 1, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 4, 
+      "head": null, 
+      "name": "North Region", 
+      "lon": null, 
+      "number": 1, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 4, 
+      "head": null, 
+      "name": "Central Region", 
+      "lon": null, 
+      "number": 2, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 4, 
+      "head": null, 
+      "name": "Southern Region", 
+      "lon": null, 
+      "number": 3, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 1, 
+      "name": "Chitipa", 
+      "lon": null, 
+      "number": 4, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 1, 
+      "name": "Karonga", 
+      "lon": null, 
+      "number": 5, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 1, 
+      "name": "Rumphi", 
+      "lon": null, 
+      "number": 6, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 1, 
+      "name": "Mzimba", 
+      "lon": null, 
+      "number": 7, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 1, 
+      "name": "Nkhatabay", 
+      "lon": null, 
+      "number": 8, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 4, 
+      "name": "Kameme", 
+      "lon": null, 
+      "number": 9, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 4, 
+      "name": "Kapenda", 
+      "lon": null, 
+      "number": 10, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 4, 
+      "name": "Misuku", 
+      "lon": null, 
+      "number": 11, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 4, 
+      "name": "Chambo", 
+      "lon": null, 
+      "number": 12, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 4, 
+      "name": "Wenya", 
+      "lon": null, 
+      "number": 13, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 5, 
+      "name": "Ngana", 
+      "lon": null, 
+      "number": 15, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 5, 
+      "name": "Kaporo", 
+      "lon": null, 
+      "number": 16, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 5, 
+      "name": "Wiliro", 
+      "lon": null, 
+      "number": 17, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 4, 
+      "name": "Lupembe", 
+      "lon": null, 
+      "number": 18, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 4, 
+      "name": "Fulirwa", 
+      "lon": null, 
+      "number": 19, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 4, 
+      "name": "Bolero", 
+      "lon": null, 
+      "number": 20, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 6, 
+      "name": "Mhuju", 
+      "lon": null, 
+      "number": 21, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 6, 
+      "name": "Katowo", 
+      "lon": null, 
+      "number": 22, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 6, 
+      "name": "Mphompha", 
+      "lon": null, 
+      "number": 23, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 6, 
+      "name": "Mlowe", 
+      "lon": null, 
+      "number": 24, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 7, 
+      "name": "Ekwendeni", 
+      "lon": null, 
+      "number": 25, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 7, 
+      "name": "Kamteteka", 
+      "lon": null, 
+      "number": 26, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 26, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 7, 
+      "name": "Mzambazi", 
+      "lon": null, 
+      "number": 27, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 7, 
+      "name": "Mabiri", 
+      "lon": null, 
+      "number": 28, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 28, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 7, 
+      "name": "Engutwini", 
+      "lon": null, 
+      "number": 29, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 29, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 7, 
+      "name": "Enfeni", 
+      "lon": null, 
+      "number": 30, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 30, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 7, 
+      "name": "Lunjika", 
+      "lon": null, 
+      "number": 31, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 31, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 7, 
+      "name": "Njuyu", 
+      "lon": null, 
+      "number": 32, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 32, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 8, 
+      "name": "Chikwina", 
+      "lon": null, 
+      "number": 33, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 33, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 8, 
+      "name": "Chitheka", 
+      "lon": null, 
+      "number": 34, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 34, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 8, 
+      "name": "Mzenga", 
+      "lon": null, 
+      "number": 35, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 35, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 8, 
+      "name": "Kande", 
+      "lon": null, 
+      "number": 36, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 36, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 8, 
+      "name": "Liuzi", 
+      "lon": null, 
+      "number": 37, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 37, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 2, 
+      "name": "Kasungu", 
+      "lon": null, 
+      "number": 38, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 38, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 2, 
+      "name": "Nkhotakota", 
+      "lon": null, 
+      "number": 39, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 39, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 2, 
+      "name": "Ntchisi", 
+      "lon": null, 
+      "number": 40, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 40, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 2, 
+      "name": "Dowa", 
+      "lon": null, 
+      "number": 41, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 41, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 2, 
+      "name": "Mchinji", 
+      "lon": null, 
+      "number": 42, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 42, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 2, 
+      "name": "Salima", 
+      "lon": null, 
+      "number": 43, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 43, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 2, 
+      "name": "Lilongwe", 
+      "lon": null, 
+      "number": 44, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 44, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 2, 
+      "name": "Dedza", 
+      "lon": null, 
+      "number": 45, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 45, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 2, 
+      "name": "Ntcheu", 
+      "lon": null, 
+      "number": 46, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 46, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 2, 
+      "name": "Mangochi", 
+      "lon": null, 
+      "number": 47, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 47, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 3, 
+      "name": "Balaka", 
+      "lon": null, 
+      "number": 48, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 48, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 3, 
+      "name": "Machinga", 
+      "lon": null, 
+      "number": 49, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 49, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 3, 
+      "name": "Zomba", 
+      "lon": null, 
+      "number": 50, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 50, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 3, 
+      "name": "Blantyre", 
+      "lon": null, 
+      "number": 51, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 51, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 3, 
+      "name": "Chiradzulu", 
+      "lon": null, 
+      "number": 52, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 52, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 3, 
+      "name": "Mwanza", 
+      "lon": null, 
+      "number": 53, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 53, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 3, 
+      "name": "Phalombe", 
+      "lon": null, 
+      "number": 54, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 54, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 3, 
+      "name": "Mulanje", 
+      "lon": null, 
+      "number": 55, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 55, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 3, 
+      "name": "Chikwawa", 
+      "lon": null, 
+      "number": 56, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 56, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 3, 
+      "name": "Thyolo", 
+      "lon": null, 
+      "number": 57, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 57, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 5, 
+      "head": 3, 
+      "name": "Nsanje", 
+      "lon": null, 
+      "number": 58, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 58, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 38, 
+      "name": "Mwansambo", 
+      "lon": null, 
+      "number": 59, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 59, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 38, 
+      "name": "Ngala", 
+      "lon": null, 
+      "number": 60, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 60, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 38, 
+      "name": "Mtosa", 
+      "lon": null, 
+      "number": 61, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 61, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 38, 
+      "name": "Dwambazi", 
+      "lon": null, 
+      "number": 62, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 62, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 38, 
+      "name": "Nsenjera", 
+      "lon": null, 
+      "number": 63, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 63, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 37, 
+      "name": "Chamwabvi", 
+      "lon": null, 
+      "number": 64, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 64, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 37, 
+      "name": "Kamboni", 
+      "lon": null, 
+      "number": 65, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 65, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 37, 
+      "name": "Santhe", 
+      "lon": null, 
+      "number": 66, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 66, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 37, 
+      "name": "Nkhamenya", 
+      "lon": null, 
+      "number": 67, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 67, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 37, 
+      "name": "Simlemba", 
+      "lon": null, 
+      "number": 68, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 68, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 39, 
+      "name": "Malomo", 
+      "lon": null, 
+      "number": 69, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 69, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 39, 
+      "name": "Chinguluwe", 
+      "lon": null, 
+      "number": 70, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 70, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 39, 
+      "name": "Kamsonga", 
+      "lon": null, 
+      "number": 71, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 71, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 39, 
+      "name": "Mdinda", 
+      "lon": null, 
+      "number": 72, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 72, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 39, 
+      "name": "Mzandu", 
+      "lon": null, 
+      "number": 73, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 73, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 40, 
+      "name": "Nalunga", 
+      "lon": null, 
+      "number": 74, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 74, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 40, 
+      "name": "Chankhungu", 
+      "lon": null, 
+      "number": 75, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 75, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 40, 
+      "name": "Msakambewa", 
+      "lon": null, 
+      "number": 76, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 76, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 40, 
+      "name": "Bowe", 
+      "lon": null, 
+      "number": 77, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 77, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 40, 
+      "name": "Chinsepo", 
+      "lon": null, 
+      "number": 78, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 78, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 41, 
+      "name": "Chipumi", 
+      "lon": null, 
+      "number": 79, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 79, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 41, 
+      "name": "Kaigwazanga", 
+      "lon": null, 
+      "number": 80, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 80, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 41, 
+      "name": "Mkanda", 
+      "lon": null, 
+      "number": 81, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 81, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 41, 
+      "name": "Chioshya", 
+      "lon": null, 
+      "number": 82, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 82, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 41, 
+      "name": "Kapanga", 
+      "lon": null, 
+      "number": 83, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 83, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 42, 
+      "name": "Makioni", 
+      "lon": null, 
+      "number": 84, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 84, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 42, 
+      "name": "Chinguluwe", 
+      "lon": null, 
+      "number": 85, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 85, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 42, 
+      "name": "Lifuwu", 
+      "lon": null, 
+      "number": 86, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 86, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 42, 
+      "name": "Maganga", 
+      "lon": null, 
+      "number": 87, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 87, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 42, 
+      "name": "Mchoka", 
+      "lon": null, 
+      "number": 88, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 88, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 43, 
+      "name": "Ukwe", 
+      "lon": null, 
+      "number": 89, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 89, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 43, 
+      "name": "Chiwamba", 
+      "lon": null, 
+      "number": 90, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 90, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 43, 
+      "name": "Lemwe", 
+      "lon": null, 
+      "number": 91, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 91, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 43, 
+      "name": "Mtenthera", 
+      "lon": null, 
+      "number": 92, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 92, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 43, 
+      "name": "Ndaula", 
+      "lon": null, 
+      "number": 93, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 93, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 44, 
+      "name": "Mtakataka", 
+      "lon": null, 
+      "number": 94, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 94, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 44, 
+      "name": "Chikuse", 
+      "lon": null, 
+      "number": 95, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 95, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 44, 
+      "name": "Kafere", 
+      "lon": null, 
+      "number": 96, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 96, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 44, 
+      "name": "Kalulu", 
+      "lon": null, 
+      "number": 97, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 97, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 44, 
+      "name": "Chitowo", 
+      "lon": null, 
+      "number": 98, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 98, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 45, 
+      "name": "Bilila", 
+      "lon": null, 
+      "number": 99, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 99, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 45, 
+      "name": "Kasinje", 
+      "lon": null, 
+      "number": 100, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 100, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 45, 
+      "name": "Mlangeni", 
+      "lon": null, 
+      "number": 101, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 101, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 45, 
+      "name": "Namisu", 
+      "lon": null, 
+      "number": 102, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 102, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 45, 
+      "name": "Tsangano", 
+      "lon": null, 
+      "number": 103, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 103, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 46, 
+      "name": "Chilipa", 
+      "lon": null, 
+      "number": 104, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 104, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 46, 
+      "name": "Lugola", 
+      "lon": null, 
+      "number": 105, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 105, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 46, 
+      "name": "Luwalika", 
+      "lon": null, 
+      "number": 106, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 106, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 46, 
+      "name": "Malembo", 
+      "lon": null, 
+      "number": 107, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 107, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 46, 
+      "name": "Mkumba", 
+      "lon": null, 
+      "number": 108, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 108, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 47, 
+      "name": "Phimbi", 
+      "lon": null, 
+      "number": 109, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 109, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 47, 
+      "name": "Kwitanda", 
+      "lon": null, 
+      "number": 110, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 110, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 47, 
+      "name": "Mbera", 
+      "lon": null, 
+      "number": 111, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 111, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 47, 
+      "name": "Namanolo", 
+      "lon": null, 
+      "number": 112, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 112, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 47, 
+      "name": "Phalula", 
+      "lon": null, 
+      "number": 113, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 113, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 48, 
+      "name": "Gawanani", 
+      "lon": null, 
+      "number": 114, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 114, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 48, 
+      "name": "Ngokwe", 
+      "lon": null, 
+      "number": 115, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 115, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 48, 
+      "name": "Mposa", 
+      "lon": null, 
+      "number": 116, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 116, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 48, 
+      "name": "Mangamba", 
+      "lon": null, 
+      "number": 117, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 117, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 48, 
+      "name": "Nyambi", 
+      "lon": null, 
+      "number": 118, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 118, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 49, 
+      "name": "Makwapala", 
+      "lon": null, 
+      "number": 119, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 119, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 49, 
+      "name": "Chingale", 
+      "lon": null, 
+      "number": 120, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 120, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 49, 
+      "name": "Thondwe", 
+      "lon": null, 
+      "number": 121, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 121, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 49, 
+      "name": "Lambulira", 
+      "lon": null, 
+      "number": 122, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 122, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 49, 
+      "name": "Ngwelero", 
+      "lon": null, 
+      "number": 123, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 123, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 50, 
+      "name": "Madziabango", 
+      "lon": null, 
+      "number": 124, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 124, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 50, 
+      "name": "Dziwe", 
+      "lon": null, 
+      "number": 125, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 125, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 50, 
+      "name": "Lundu", 
+      "lon": null, 
+      "number": 126, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 126, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 50, 
+      "name": "Lirangwe", 
+      "lon": null, 
+      "number": 127, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 127, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 50, 
+      "name": "Chimembe", 
+      "lon": null, 
+      "number": 128, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 128, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 51, 
+      "name": "Milepa", 
+      "lon": null, 
+      "number": 129, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 129, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 51, 
+      "name": "Nkalo", 
+      "lon": null, 
+      "number": 130, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 130, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 51, 
+      "name": "Chitera", 
+      "lon": null, 
+      "number": 131, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 131, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 51, 
+      "name": "Nguludi", 
+      "lon": null, 
+      "number": 132, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 132, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 52, 
+      "name": "Neno", 
+      "lon": null, 
+      "number": 133, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 133, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 52, 
+      "name": "Kunenekude", 
+      "lon": null, 
+      "number": 134, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 134, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 52, 
+      "name": "Lisungwi", 
+      "lon": null, 
+      "number": 135, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 135, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 52, 
+      "name": "Thambani", 
+      "lon": null, 
+      "number": 136, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 136, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 52, 
+      "name": "Tulonkhondo", 
+      "lon": null, 
+      "number": 137, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 137, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 53, 
+      "name": "Chitekesa", 
+      "lon": null, 
+      "number": 138, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 138, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 53, 
+      "name": "Migowi", 
+      "lon": null, 
+      "number": 139, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 139, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 53, 
+      "name": "Mpasa", 
+      "lon": null, 
+      "number": 140, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 140, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 53, 
+      "name": "Nambiti", 
+      "lon": null, 
+      "number": 141, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 141, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 53, 
+      "name": "Nkhulambe", 
+      "lon": null, 
+      "number": 142, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 142, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 54, 
+      "name": "Chambe", 
+      "lon": null, 
+      "number": 143, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 143, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 54, 
+      "name": "Bondo", 
+      "lon": null, 
+      "number": 144, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 144, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 54, 
+      "name": "Mbiza", 
+      "lon": null, 
+      "number": 145, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 145, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 54, 
+      "name": "Muloza", 
+      "lon": null, 
+      "number": 146, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 146, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 54, 
+      "name": "Namphungo", 
+      "lon": null, 
+      "number": 147, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 147, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 55, 
+      "name": "Chapananga", 
+      "lon": null, 
+      "number": 148, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 148, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 55, 
+      "name": "Dolo", 
+      "lon": null, 
+      "number": 149, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 149, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 55, 
+      "name": "Ndakwera", 
+      "lon": null, 
+      "number": 150, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 150, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 55, 
+      "name": "Makhuwira", 
+      "lon": null, 
+      "number": 151, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 151, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 55, 
+      "name": "Chipwaila", 
+      "lon": null, 
+      "number": 152, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 152, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 56, 
+      "name": "Bvumbwe", 
+      "lon": null, 
+      "number": 153, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 153, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 56, 
+      "name": "Mikolongwe", 
+      "lon": null, 
+      "number": 154, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 154, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 56, 
+      "name": "Khonjeni", 
+      "lon": null, 
+      "number": 155, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 155, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 56, 
+      "name": "Changata", 
+      "lon": null, 
+      "number": 156, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 156, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 56, 
+      "name": "Thekerani", 
+      "lon": null, 
+      "number": 157, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 157, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 57, 
+      "name": "Sorgin", 
+      "lon": null, 
+      "number": 158, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 158, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 57, 
+      "name": "Lulwe", 
+      "lon": null, 
+      "number": 159, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 159, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 57, 
+      "name": "Mlolo", 
+      "lon": null, 
+      "number": 160, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 160, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 57, 
+      "name": "Ndamera", 
+      "lon": null, 
+      "number": 161, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 161, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 2, 
+      "head": 57, 
+      "name": "Chididi", 
+      "lon": null, 
+      "number": 162, 
+      "lat": null
+    }
+  }
+]

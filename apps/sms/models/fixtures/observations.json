@@ -1,0 +1,110 @@
+[
+  {
+    "pk": 1, 
+    "model": "sms.observation", 
+    "fields": {
+      "letter": "e", 
+      "uid": "edema", 
+      "name": "Edema"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "sms.observation", 
+    "fields": {
+      "letter": "a", 
+      "uid": "appetite", 
+      "name": "Appetite Loss"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "sms.observation", 
+    "fields": {
+      "letter": "d", 
+      "uid": "diarrhea", 
+      "name": "Diarrhea"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "sms.observation", 
+    "fields": {
+      "letter": "v", 
+      "uid": "vomiting", 
+      "name": "Vomiting"
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "sms.observation", 
+    "fields": {
+      "letter": "u", 
+      "uid": "unresponsive", 
+      "name": "Unresponsive"
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "sms.observation", 
+    "fields": {
+      "letter": "f", 
+      "uid": "fever", 
+      "name": "Fever"
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "sms.observation", 
+    "fields": {
+      "letter": "b", 
+      "uid": "breathing", 
+      "name": "Breathing Difficulty"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "sms.observation", 
+    "fields": {
+      "letter": "cg", 
+      "uid": "cough", 
+      "name": "Coughing"
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "sms.observation", 
+    "fields": {
+      "letter": "cf", 
+      "uid": "confusion", 
+      "name": "Confusion"
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "sms.observation", 
+    "fields": {
+      "letter": "nr", 
+      "uid": "responsive", 
+      "name": "Non Responsive"
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "sms.observation", 
+    "fields": {
+      "letter": "cv", 
+      "uid": "fits", 
+      "name": "Fits/Convulsions"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "sms.observation", 
+    "fields": {
+      "letter": "o", 
+      "uid": "oedema", 
+      "name": "Oedema"
+    }
+  }
+]
