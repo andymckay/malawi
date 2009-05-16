@@ -26,4 +26,3 @@ if __name__ == "__main__":
         handler(conf, *sys.argv[2:])
     elif settings:        
         execute_manager(settings)
-        

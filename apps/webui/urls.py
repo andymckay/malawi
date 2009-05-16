@@ -6,6 +6,6 @@ admin.autodiscover()
 admin_urls = (r'^admin/(.*)', admin.site.root)
 
 urlpatterns = patterns('',
-    (r'^', include('rapidsms_baseui.urls')),
+    (r'^', include('malnutrition.ui.urls')),
     admin_urls,
 )

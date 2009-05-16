@@ -1,0 +1,45 @@
+[
+  {
+    "pk": 1, 
+    "model": "sms.zone", 
+    "fields": {
+      "category": 1, 
+      "head": null, 
+      "name": "Malawi", 
+      "lon": null, 
+      "number": 1, 
+      "lat": null
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "sms.facility", 
+    "fields": {
+      "name": "Salima", 
+      "zone": 1, 
+      "lon": null, 
+      "role": 1, 
+      "lat": null, 
+      "codename": "1201"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "sms.case", 
+    "fields": {
+      "village": "", 
+      "first_name": "Bob", 
+      "last_name": "Jones", 
+      "district": "", 
+      "zone": 1, 
+      "dob": "2008-12-16", 
+      "gender": "M", 
+      "created_at": "2009-05-15 19:01:10", 
+      "provider": 1, 
+      "updated_at": "2009-05-15 19:01:10", 
+      "ref_id": 69, 
+      "mobile": "", 
+      "guardian": ""
+    }
+  }
+]
