@@ -3,9 +3,11 @@ from django.contrib import admin
 
 admin.autodiscover()
 
-admin_urls = (r'^admin/(.*)', admin.site.root)
-
 urlpatterns = patterns('',
+    (r'^$', 'apps.webui.views.dashboard.view'),
+    
+    
+    # if nothing else matches
     (r'^', include('malnutrition.ui.urls')),
-    admin_urls,
+    (r'^admin/(.*)', admin.site.root),
 )

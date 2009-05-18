@@ -4,11 +4,23 @@ from django.contrib.auth.models import User
 from apps.sms.models.base import Provider, Facility
 from apps.sms.app import HandlerFailed, _
 
-def join(self, message, last_name, first_name, gmc_id):
+from malnutrition.forms import Form
+from malnutrition.forms import BooleanField, DateField, StringField, GenderField, FloatField
+
+class JoinForm(Form):
+    last = StringField(valid="(.+)")
+    first = StringField(valid="(.+)")
+    gmc = StringField(valid="(\d+)")
+    
+def join(self, message, text):
     """ Join a USER based on spec. """
     # i believe GMC id is the clinic ID
+    form = JoinForm(text)
+    if not form.is_valid():
+        return message.respond("There was an error processing that. %s" % ". ".join(form.errors))
+        
     try:
-        facility = Facility.objects.get(codename=gmc_id)
+        facility = Facility.objects.get(codename=form.gmc.data)
     except Facility.DoesNotExist:
         raise HandlerFailed(_("The GMC ID given does not exist."))
 
@@ -16,7 +28,7 @@ def join(self, message, last_name, first_name, gmc_id):
     in_use = Provider.by_mobile(mobile)
     
     if not in_use: 
-        user = User(username="%s.%s" % (first_name, last_name), first_name=first_name.title(), last_name=last_name.title())
+        user = User(username="%s.%s" % (form.first.data, form.last.data), first_name=form.first.data, last_name=form.last.data)
         user.save()
 
         # ok its not in use, save it all and respond

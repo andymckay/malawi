@@ -58,7 +58,7 @@ class ReportForm(Form):
 def report(self, message, text):
     form = ReportForm(text)
     if not form.is_valid():
-        return message.respond("There was an error processing that. %s" % ". ".join(report.errors))
+        return message.respond("There was an error processing that. %s" % ". ".join(form.errors))
         
     provider = Provider.by_mobile(message.peer)
     

@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+
+<h2>Unique SMS Reports</h2>
+{{ message|safe }}
+
+<h2>% Severe Malnutrition</h2>
+{{ severe|safe }}
+
+<h2>% Moderate Malnutrition</h2>
+{{ moderate|safe }}
+
+<h2>% Oedema</h2>
+{{ oedema|safe }}
+
+<h2>% Diarrhea</h2>
+{{ diarrhea|safe }}
+
+<h2>Average MUAC</h2>
+{{ muac|safe }}
+
+<h2>Average Height</h2>
+{{ height|safe }}
+
+<h2>Average Weight</h2>
+{{ weight|safe }}
+
+{% endblock %}

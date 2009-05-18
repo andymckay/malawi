@@ -13,3 +13,5 @@ INSTALLED_APPS.append('malnutrition.ui')
 
 TEMPLATE_CONTEXT_PROCESSORS = list(TEMPLATE_CONTEXT_PROCESSORS)
 TEMPLATE_CONTEXT_PROCESSORS.append("apps.context.processor")
+
+CACHE_BACKEND = 'file:///tmp/django_cache'

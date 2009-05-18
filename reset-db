@@ -1,0 +1,43 @@
+#!/usr/bin/python
+import sys
+import os
+path = os.path.abspath(os.path.join(os.path.dirname(__file__)))
+sys.path.append(path)
+
+os.environ['RAPIDSMS_INI'] = os.path.join(path, "rapidsms.ini")
+os.environ['DJANGO_SETTINGS_MODULE'] = 'rapidsms.webui.settings'
+
+if "--force" not in sys.argv:
+    print """******** WARNING **********
+
+This DELETES all the data from the database and recreates
+all the key fixtures for this project from the file system. 
+
+Are you sure you want to do that?
+
+If so pass repeat this command with --force at the end."""
+    sys.exit(1)
+
+import time
+from tempfile import mkstemp
+backup = mkstemp(".db")[1]
+print "Database backed up to %s, just in case." % backup
+os.system('mv malawi.db %s' % backup)
+os.system('django-admin.py makemessages -l en --pythonpath=. --settings=settings')
+os.system('django-admin.py compilemessages --pythonpath=. --settings=settings')
+
+from django.contrib.auth import models as auth_app
+from django.contrib.auth.management import create_superuser 
+
+from django.core.management import call_command  
+from django.db.models.signals import post_save, post_syncdb
+
+# turn off asking about the super user
+post_syncdb.disconnect(create_superuser, sender=auth_app, dispatch_uid = "django.contrib.auth.management.create_superuser")
+call_command("syncdb")
+call_command("loaddata", "observations.json")
+call_command("loaddata", "zones.json")
+call_command("loaddata", "auth.json")
+
+print "Database reset."
+
