@@ -1,6 +1,3 @@
-from django.db import models
-from django.utils.translation import ugettext_lazy as _
-
 from malnutrition.models import zone, case, facility
 from malnutrition.models import provider, log, report
 
@@ -16,7 +13,17 @@ class Facility(facility.Facility):
 class Provider(provider.Provider):
     class Meta(provider.Provider.Meta):
         app_label = "sms"
-        
+    
+    def get_dictionary(self):
+        """ Return the data as a generic dictionary with some useful convenience methods done """
+        data = {
+                "user_first_name": self.user.first_name,
+                "user_last_name": self.user.last_name,
+            }
+        dct = provider.Provider.get_dictionary(self)
+        dct.update(data)
+        return dct
+            
 class Case(case.Case):
     """ A generic case or patient table """
     class Meta(case.Case.Meta):
@@ -39,16 +46,22 @@ class Case(case.Case):
 class Observation(report.Observation):
     class Meta(report.Observation.Meta):
         app_label = "sms"
- 
-class Report(report.Report):
-    """ A generic report """
-    class Meta(report.Report.Meta):
-        app_label = "sms"
 
 class ReportMalnutrition(report.ReportMalnutrition):
     """ A generic report """
     class Meta(report.ReportMalnutrition.Meta):
         app_label = "sms"
+
+    def get_dictionary(self):
+        """ Return the data as a generic dictionary with some useful convenience methods done """
+        dct = report.Report.get_dictionary(self)
+        dct.update({"oedema":"no", "diarrhea":"no"})
+        if self.observed.filter(name="Oedema"):
+            dct["oedema"] = "yes"
+        if self.observed.filter(name="Diarrhea"):
+            dct["diarrhea"] = "yes"
+
+        return dct
 
 class MessageLog(log.MessageLog):
     """ Yes please we'll have a message log too """

@@ -1,29 +1,82 @@
 {% extends "layout.html" %}
 {% block title %}Dashboard{% endblock %}
-{% block content %}
 
+{% block bar %}
+<h2>Filter by Zone</h2>
+<form>
+    <fieldset>
+{{ filter.as_custom }} 
+<div><input type="submit" value="filter" /></div>
+    </fieldset>
+</form>
+{% endblock %}
+
+{% block content %}
+<table>
+    <thead>
+    <tr>
+        <th><abbr title="Last Calendar Month">Last month</abbr></th>
+        <th><abbr title="# of unique SMS reports">Reports</abbr></th>
+        <th><abbr title="% moderate malnutrition">Moderate</abbr></th>
+        <th><abbr title="% severe malnutrition">Severe</abbr></th>
+        <th><abbr title="% stunting">Stunting</abbr></th>
+        <th><abbr title="% oedema">Oedema</abbr></th>
+        <th><abbr title="% diarrhea">Diarrhea</abbr></th>
+    </tr>
+    </thead>
+    <tbody>
+        {% for row in lastmonth %}
+        <tr>
+            {% for entry in row %}    
+                {% if forloop.first %}
+                <td>{{ entry|title }}</td>
+                {% else %}
+                <td>{{ entry.message|stringformat:".2f" }}</td>
+                <td>{{ entry.moderate|stringformat:".2f" }}</td>
+                <td>{{ entry.severe|stringformat:".2f" }}</td>
+                <td>{{ entry.stunting|stringformat:".2f" }}</td>
+                <td>{{ entry.oedema|stringformat:".2f" }}</td>
+                <td>{{ entry.diarrhea|stringformat:".2f" }}</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 <h2>Unique SMS Reports</h2>
-{{ message|safe }}
+{{ message.javascript|safe }}
+<p><a href="/?export=message">Export graph data</a></p>
 
 <h2>% Severe Malnutrition</h2>
-{{ severe|safe }}
+{{ severe.javascript|safe }}
+<p><a href="/?export=severe">Export graph data</a></p>
 
 <h2>% Moderate Malnutrition</h2>
-{{ moderate|safe }}
+{{ moderate.javascript|safe }}
+<p><a href="/?export=moderate">Export graph data</a></p>
+
+<h2>% Stunting</h2>
+{{ stunting.javascript|safe }}
+<p><a href="/?export=stunting">Export graph data</a></p>
 
 <h2>% Oedema</h2>
-{{ oedema|safe }}
+{{ oedema.javascript|safe }}
+<p><a href="/?export=oedema">Export graph data</a></p>
 
 <h2>% Diarrhea</h2>
-{{ diarrhea|safe }}
+{{ diarrhea.javascript|safe }}
+<p><a href="/?export=diarrhea">Export graph data</a></p> 
 
 <h2>Average MUAC</h2>
-{{ muac|safe }}
+{{ muac.javascript|safe }}
+<p><a href="/?export=muac">Export graph data</a></p>
 
 <h2>Average Height</h2>
-{{ height|safe }}
+{{ height.javascript|safe }}
+<p><a href="/?export=height">Export graph data</a></p>
 
 <h2>Average Weight</h2>
-{{ weight|safe }}
+{{ weight.javascript|safe }}
+<p><a href="/?export=weight">Export graph data</a></p>
 
 {% endblock %}

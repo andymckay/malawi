@@ -1,8 +1,6 @@
 from django.db import models
 from django.utils.translation import ugettext
 
-def _(txt): return txt
-
 from django.contrib.auth.models import User, Group
 
 import rapidsms
@@ -14,20 +12,9 @@ import re, time, datetime
 from models.base import Provider, MessageLog
 
 from django.core.urlresolvers import RegexURLResolver, Resolver404
-resolver = RegexURLResolver(r'', "apps.sms.urls")
+resolver = RegexURLResolver(r'', "apps.sms.sms")
 
-class HandlerFailed(Exception):
-    pass
-
-def authenticated (func):
-    def wrapper (self, message, *args):
-        if message.sender:
-            return func(self, message, *args)
-        else:
-            message.respond(_("%s is not a registered number.")
-                            % message.peer)
-            return True
-    return wrapper
+from malnutrition.sms.command import HandlerFailed, authenticated, _
         
 class App(rapidsms.app.App):
     MAX_MSG_LEN = 140
@@ -59,7 +46,10 @@ class App(rapidsms.app.App):
 
         message.was_handled = True
         try:
-            return callback(self, message, *callback_args, **callback_kwargs)
+            res = callback(message, *callback_args, **callback_kwargs)
+            if callable(res):
+                res = res()
+            return re
         except HandlerFailed, e:
             return message.respond(e.message)
         except:
