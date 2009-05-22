@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Details</h2>
+<dl>
+    <dt>Case ID #</dt>
+    <dd>{{ object.ref_id }}</dd>
+    <dt>Gender</dt>
+    <dd>{{ object.get_gender_display }}</dd>
+    <dt>Date of Birth</dt>
+    <dd>{{ object.dob|date:"D d m Y"}}</dd>
+    <dt>Provider</dt>
+    <dd><a href="{{ object.provider.get_absolute_url }}">{{ object.provider }}</a></dd>
+    <dt>Created at</dt>
+    <dd>{{ object.created_at|date:"D d m Y"}}</dd>
+</dl>
+<h2>Reports</h2>
+{{ reports|safe }}
+
+{% endblock %}

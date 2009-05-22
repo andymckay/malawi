@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h2>Editing #{{ object.id }}</h2>
+
+<p>If you don't wish to make any changes, you can <a href="/setup/">return to setup</a></p>
+
+<form method="POST">
+    <fieldset>
+        {{ user_form.as_custom }}
+        {{ provider_form.as_custom }}
+        <div><input type="submit" value="Save" /></div>
+    </fieldset>
+</form>
+
+
+{% endblock %}
