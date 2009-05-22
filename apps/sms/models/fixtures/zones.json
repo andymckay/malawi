@@ -448,7 +448,7 @@
     "model": "sms.facility", 
     "fields": {
       "name": "Lupembe", 
-      "zone": 4, 
+      "zone": 5, 
       "lon": null, 
       "role": 1, 
       "lat": null, 
@@ -460,7 +460,7 @@
     "model": "sms.facility", 
     "fields": {
       "name": "Fulirwa", 
-      "zone": 4, 
+      "zone": 5, 
       "lon": null, 
       "role": 1, 
       "lat": null, 
@@ -472,7 +472,7 @@
     "model": "sms.facility", 
     "fields": {
       "name": "Bolero", 
-      "zone": 4, 
+      "zone": 6, 
       "lon": null, 
       "role": 1, 
       "lat": null, 

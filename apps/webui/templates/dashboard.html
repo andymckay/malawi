@@ -2,13 +2,14 @@
 {% block title %}Dashboard{% endblock %}
 
 {% block bar %}
-<h2>Filter by Zone</h2>
-<form>
-    <fieldset>
-{{ filter.as_custom }} 
-<div><input type="submit" value="filter" /></div>
-    </fieldset>
-</form>
+{% if zones %}
+<h2>Filter</h2>
+<p>
+{% for zone in zones %}
+<a href="/zone/{{ zone.id }}/">{{ zone.name }}</a><br />
+{% endfor %}
+</p>
+{% endif %}
 {% endblock %}
 
 {% block content %}
@@ -43,6 +44,7 @@
         {% endfor %}
     </tbody>
 </table>
+
 <h2>Unique SMS Reports</h2>
 {{ message.javascript|safe }}
 <p><a href="/?export=message">Export graph data</a></p>

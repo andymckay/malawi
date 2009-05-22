@@ -25,63 +25,66 @@ def providers_by_zone(zone, *args):
     if cached:
         return cached
     
-    root = Zone.objects.get(id=zone)
-    sub = Zone.objects.filter(head=zone).values("id").distinct()
-    facilities = Facility.objects.filter(zone__in=sub).values("id").distinct()
-    providers = Provider.objects.filter(clinic__in=facilities).values("id").distinct()
+    # if this is a zone that has children, go find them
+    zones = [zone,]
+    if hasattr(zone, "children"):
+        children = zone.children()
+        if children:
+            zones = children
+    
+    # so have we got facilities, or do we need to go looking for them?
+    if not isinstance(zones[0], Facility):
+        zones = [ str(p["id"]) for p in Facility.objects.filter(zone__in=zones).values("id").distinct()]
+
+    # finally get some providers
+    providers = Provider.objects.filter(clinic__in=zones).values("id").distinct()
     result = [ str(p["id"]) for p in providers ]
     cache.set("providers_by_zone_%s" % zone, result, 60)
     return result
 
 # so in malawi, all is everyone
 # and the rest is category 4, this will be slightly different in Kenya
-def _zones(method, limit, zones, *args):
+def _zones(method, limit, root, zones, facilities, *args):
     data = []
-    for area in Zone.objects.filter(zones):
-        providers = providers_by_zone(area.id, *args)
+    # start with the root
+    if root:
+        providers = providers_by_zone(root, *args)
+        data.append({ "name": "All (%s)" % root.name, "data": method("AND provider_id in (%s)"  % (",".join(providers)), 365, *args)})
+    else:
+        data.append({ "name": "All (National)", "data": method("", 365, *args)})
+
+    # then do the zones
+    _zones = Zone.objects.filter(zones)
+    if not _zones:
+        _zones = Facility.objects.filter(facilities)
+
+    for area in _zones:
+        providers = providers_by_zone(area, *args)
         res = []
         if providers:
             if limit:
-                res = method("AND provider_id in (%s)" % (limit, ",".join(providers)), 365, *args)
+                res = method("%s AND provider_id in (%s)" % (limit, ",".join(providers)), 365, *args)
             else:
                 res = method("AND provider_id in (%s)" % ",".join(providers), 365, *args)
         data.append({ "name": area.name, "data": res })
     return data
 
-def zones_plus_total(method, limit, zones, *args):
+def zones_plus_total(method, limit, root, zones, facilities, *args):
     """ How do we break down the reports by zone? """
-    data = [ { "name": "All", "data": method(limit, 365, *args) }, ]
-    data += _zones(method, limit, zones, *args)
-    return data
-    
-def zones(method, limit, zones, *args):
-    return _zones(method, limit, zones, *args)
+    return _zones(method, limit, root, zones, facilities, *args)
 
-
-
-def view(request):
+def _view(request, root, zones, facilities):
     context = {}
-    
-    limit = None
-    filter = request.GET.get("zone", None)
-    try:
-        filter = int(filter)
-    except (TypeError, AttributeError, ValueError):
-        pass
-        
-    if not filter:
-        method = zones_plus_total
-        qfilter = Q(category=4)
-    else:
-        method = zones
-        qfilter = Q(id=filter)
-    
+
     graphs = Graphs(
         classes={ "ReportMalnutrition": ReportMalnutrition, "Zone": Zone }, 
-        zone_lookup = method, 
-        zones = qfilter,
-        limit = limit
+        zone_lookup = zones_plus_total, 
+        zones = zones,
+        root = root,
+        limit = "",
+        facilities = facilities
         )
+
     context["message"] = graphs.render(name="message", type=graphs.count, args=None)
     context["severe"] = graphs.render(name="severe", type=graphs.percentage_status, args=[2,3])
     context["moderate"] = graphs.render(name="moderate", type=graphs.percentage_status, args=[1,])
@@ -129,11 +132,42 @@ def view(request):
     context["lastmonth"] = lastmonthdata.items()
     context["lastmonth"].sort()
     
+    # we want the zones for the table, but don't want to filter down onto a village (or GMC)
+    # maybe, not sure
+    _zones_filter = Zone.objects.filter(zones).order_by("name")
+    _zones_list = _zones_filter
+    if not _zones_list:
+        _zones_list = Facility.objects.filter(facilities).order_by("name")
+        
+    
     form = FilterForm(request.GET)
-    zone_list = [ [z.id, z.name ] for z in Zone.objects.filter(Q(category=4)) ]
+    zone_list = [ [z.id, z.name ] for z in _zones_list ]
     zone_list = [ ["", "All"], ] + zone_list
     form.fields["zone"].choices = zone_list
     context["filter"] = form
-    
+    context["zones"] = _zones_filter
+
+    current = root
+    context["breadcrumbs"] = [
+    { "link": "/", "title":"National"},
+    ]
+    if root:
+        while current.parent():
+            current = current.parent()
+            context["breadcrumbs"].append({"link": "/zone/%s/" % current.id, "title": current.name })
+        context["breadcrumbs"].append({"link": "/zone/%s/" % root.id, "title": root.name }) 
+        
     return as_html(request, "dashboard.html", context)
-    
+
+def view(request, zone_id=None):
+    if not zone_id:
+        # we are at the root
+        root = None
+        zones = Q(category=4)
+        facilities = None
+    else:
+        zone = Zone.objects.get(id=zone_id)
+        root = zone
+        zones = Q(head=zone)
+        facilities = Q(zone=zone)
+    return _view(request, root, zones, facilities) 

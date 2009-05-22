@@ -35,6 +35,7 @@ class FakeMessage:
 now = datetime.now()
 
 fm = FakeMessage("1234567")
+# this is Kaigwazanga, a GMC in the North Region > Rumphi Zone
 MalawiJoin(fm, "15 Andy McKay")()
 MalawiNew(fm, "50 15 M 19102008 123124124")()
 muac = 130
@@ -42,20 +43,56 @@ height = 100
 for x in range(0, 100):
     muac -= 1
     height -= 0.5
-    MalawiReport(fm, "50 25.2 %s %s N Y" % (height, muac))()
+    MalawiReport(fm, "50 28.2 %s %s N Y" % (height, muac))()
     res = ReportMalnutrition.objects.filter(case=1).latest("entered_at")
     res.entered_at = now - timedelta(days=x)
     res.save()
 
+fm = FakeMessage("1234560")
+# Mkanda > Kaigwazanga
+MalawiJoin(fm, "16 Andy McKay")()
+MalawiNew(fm, "51 16 M 19102008 123124124")()
+muac = 120
+height = 90
+for x in range(0, 100):
+    muac -= 1
+    height -= 0.5
+    MalawiReport(fm, "51 21.2 %s %s N Y" % (height, muac))()
+    res = ReportMalnutrition.objects.filter(case=2).latest("entered_at")
+    res.entered_at = now - timedelta(days=x)
+    res.save()
+
 fm = FakeMessage("999999")
-MalawiJoin(fm, "162 Coulibaly Mariam")()
+# this is Changata, a GMC in the Southeern Region > Thyolo
+
+MalawiJoin(fm, "126 Coulibaly Mariam")()
 MalawiNew(fm, "70 1201 M 19102008 123124124")()
 muac = 150
 height = 10
 for x in range(0, 100):
     muac -= 1
     height += 0.5
-    MalawiReport(fm, "70 25.2 95.5 %s N Y" % muac)()
-    res = ReportMalnutrition.objects.filter(case=2).latest("entered_at")
+    MalawiReport(fm, "70 24.2 95.5 %s N Y" % muac)()
+    res = ReportMalnutrition.objects.filter(case=3).latest("entered_at")
     res.entered_at = now - timedelta(days=x * 2)
     res.save()
+
+fm = FakeMessage("999299")
+# this is Changata, a GMC in the Southeern Region > Thyolo
+MalawiJoin(fm, "127 Coulibaly Mariam")()
+MalawiNew(fm, "71 1201 M 19102008 123124124")()
+muac = 152
+height = 30
+for x in range(0, 100):
+    muac -= 1.1
+    height += 0.5
+    MalawiReport(fm, "71 25.2 95.5 %s N Y" % muac)()
+    res = ReportMalnutrition.objects.filter(case=4).latest("entered_at")
+    res.entered_at = now - timedelta(days=x * 2)
+    res.save()
+    
+print 
+print Facility.objects.get(codename=126).name
+print Facility.objects.get(codename=127).name
+print Facility.objects.get(codename=15).name
+print Facility.objects.get(codename=16).name
