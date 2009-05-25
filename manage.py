@@ -20,6 +20,12 @@ conf = Config(os.environ["RAPIDSMS_INI"])
 import settings
 setup_environ(settings) 
 
+if sys.argv[1] == "test":
+    from django.db.models.signals import post_save
+    from django.contrib.auth.models import User
+    from apps.sms.models.profile import create_profile
+    post_save.disconnect(create_profile, sender=User)
+
 if __name__ == "__main__":
     if hasattr(Manager, sys.argv[1]):
         handler = getattr(Manager(), sys.argv[1])

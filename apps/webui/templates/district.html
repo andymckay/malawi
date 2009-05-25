@@ -2,11 +2,14 @@
 {% block title %}District{% endblock %}
 
 {% block content %}
-<p>Please pick a district</p>
+<p>Please pick a district:</p>
+{% if districts %}
 <ul>
     {% for district in districts %}
     <li><a href="/zone/{{ district.id }}/">{{ district.name }}</li> 
     {% endfor %}
 </ul>
-
+{% else %}
+    <p class="notice">You do not have access to that.</p>
+{% endif %}
 {% endblock %}

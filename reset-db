@@ -34,6 +34,12 @@ from django.db.models.signals import post_save, post_syncdb
 
 # turn off asking about the super user
 post_syncdb.disconnect(create_superuser, sender=auth_app, dispatch_uid = "django.contrib.auth.management.create_superuser")
+
+# turn off user profiles for loaddata
+from django.contrib.auth.models import User
+from apps.sms.models.profile import Profile, create_profile
+post_save.disconnect(create_profile, sender=User)
+
 call_command("syncdb")
 call_command("loaddata", "observations.json")
 call_command("loaddata", "zones.json")

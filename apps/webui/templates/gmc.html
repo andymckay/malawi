@@ -2,5 +2,14 @@
 {% block title %}District{% endblock %}
 
 {% block content %}
-<p class="error">Not sure what to show here.</p>
+<p>Please pick a GMC</p>
+{% if facilities %}
+<ul>
+    {% for facility in facilities %}
+    <li><a href="/facility/{{ facility.id }}/">{{ facility.name }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+    <p class="notice">You do not have access to that.</p>
+{% endif %}
 {% endblock %}

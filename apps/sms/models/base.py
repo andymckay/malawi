@@ -5,6 +5,7 @@ from django.db import models
 
 # basic patient and zone information
 class Zone(zone.Zone):
+    """ The zones and facilities have security attached to them, so this gets a little complicated """
     class Meta(zone.Zone.Meta):
         app_label = "sms"
 
@@ -14,7 +15,8 @@ class Zone(zone.Zone):
 class Facility(facility.Facility):
     class Meta(facility.Facility.Meta):
         app_label = "sms"
-
+        ordering = ("name",)
+        
     def parent(self):
         return self.zone
 
@@ -24,6 +26,7 @@ class Facility(facility.Facility):
 class Case(case.Case):
     """ A generic case or patient table """
     active = models.BooleanField(default=True)
+    facility = models.ForeignKey("Facility", blank=True, null=True)
     
     class Meta(case.Case.Meta):
         app_label = "sms"     

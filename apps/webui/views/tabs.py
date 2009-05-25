@@ -1,12 +1,21 @@
-from reusable_table.table import get_dict, get
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 from django.db.models import Q
-from malnutrition.ui.views.shortcuts import as_html, login_required
-from apps.sms.models.base import Case
+
+from reusable_table.table import get_dict, get
+
+from malnutrition.ui.views.shortcuts import as_html
+
+from apps.sms.models.base import Case, Zone, Facility
+from apps.shortcuts import has_access, has_roles, get_providers
 
 @login_required
 def hsa(request):
+    providers = []
+    if not has_roles(request.user, "partner"):
+        providers = get_providers(request.user)
     nonhtml, tables = get_dict(request, [
-        ["providers", Q()],
+        ["providers", Q(id__in=providers)],
     ])
     if nonhtml:
         return nonhtml
@@ -17,10 +26,31 @@ def hsa(request):
     return as_html(request, "hsa.html", context)
 
 @login_required
+def district(request):
+    districts = []
+    for district in Zone.objects.filter().order_by("name"):
+        if has_access(request, zone=district):
+            districts.append(district)
+            
+    return as_html(request, "district.html", {"districts": districts})
+
+@login_required
+def gmc(request):
+    gmcs = []
+    for gmc in Facility.objects.filter().order_by("name"):
+        if has_access(request, facility=gmc):
+            gmcs.append(gmc)
+
+    return as_html(request, "gmc.html", {"facilities": gmcs})
+
+@login_required
 def child_list(request):
+    providers = []
+    if not has_roles(request.user, "partner"):
+        providers = get_providers(request.user)
     nonhtml, tables = get_dict(request, [
-        ["case", Q()],
-        ["reports", Q()]
+        ["case",  Q(id__in=providers)],
+        ["reports",  Q(id__in=providers)]
     ])
     if nonhtml:
         return nonhtml
@@ -31,6 +61,7 @@ def child_list(request):
     return as_html(request, "child_list.html", context)
     
 @login_required
+@user_passes_test(lambda u: u.is_staff )
 def setup(request):
     nonhtml, tables = get(request, [
         ["facilities", Q()],
@@ -41,11 +72,12 @@ def setup(request):
     if nonhtml:
         return nonhtml
 
-    context = {}
-    context["facilities"] = tables[0]
-    context["zones"] = tables[1]
-    context["message_pass"] = tables[2]
-    context["message_fail"] = tables[3]
+    context = {
+        "facilities": tables[0],
+        "zones": tables[1],
+        "message_pass": tables[2],
+        "message_fail": tables[3]
+    }
 
     return as_html(request, "setup.html", context)
     

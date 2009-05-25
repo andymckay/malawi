@@ -13,6 +13,11 @@ class MalawiReport(Report):
         return "You have attempted to record information for a child that is not yet registerd. Please register the child using the NEW command before sending this report."
       
     def success(self):
+        # hard code the zone, in case the provider 
+        clinic = self.data.provider.clinic
+        self.data.case.facility = clinic
+        self.data.case.zone = clinic.parent()
+        
         info = self.data.case.get_dictionary()
         info.update(self.data.provider.get_dictionary())
         info.update(self.data.report.get_dictionary())

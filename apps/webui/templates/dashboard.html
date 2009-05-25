@@ -5,7 +5,7 @@
 {% if zones %}
 <h2>Filter</h2>
 <p id="zones">
-<a href="?">All (Reset)</a><br />
+<a href="?" longitude="None" latitude="None">All (Reset)</a><br />
 {% for zone in zones %}
 <a href="?filter_zone={{ zone.id }}" longitude="{{ zone.lon }}" latitude="{{ zone.lat }}">{{ zone.name }}</a><br />
 {% endfor %}

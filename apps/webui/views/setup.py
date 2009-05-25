@@ -1,12 +1,18 @@
+from django.contrib.auth.decorators import user_passes_test
+from django.http import HttpResponseRedirect
+from django.db.models import Q
+
 from apps.webui.forms.models import ProviderForm, UserForm
 from apps.sms.models.base import Provider
+
 from malnutrition.ui.views.shortcuts import as_html
-from django.http import HttpResponseRedirect
+from malnutrition.ui.views.shortcuts import login_required
+
 from reusable_table.table import get_dict
-from django.db.models import Q
-from malnutrition.ui.views.shortcuts import as_html, login_required
 
 # zones vary by project
+@login_required
+@user_passes_test(lambda u: u.is_staff )
 def hsa_add(request):
     context = {}
     if request.POST:
@@ -27,6 +33,8 @@ def hsa_add(request):
 
     return as_html(request, "user_add_form.html", context)
 
+@login_required
+@user_passes_test(lambda u: u.is_staff )
 def hsa_edit(request, object_id):
     provider = Provider.objects.get(id=object_id)
     context = {}

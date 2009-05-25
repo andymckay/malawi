@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from models.base import Zone, Facility, Case, Provider, MessageLog
+from models.profile import Profile
 
 class CaseAdmin(admin.ModelAdmin):
     list_display = ("ref_id", "first_name", "last_name", "gender", "dob", "zone")
@@ -20,3 +21,4 @@ class ZoneAdmin(admin.ModelAdmin):
     list_display = ("name", "head", "get_category_display")
 
 admin.site.register(Zone, ZoneAdmin)
+admin.site.register(Profile)

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-05-18 12:56-0400\n"
+"POT-Creation-Date: 2009-05-25 18:30-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,19 +16,26 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: apps/sms/app.py:27
-#, python-format
-msgid "%s is not a registered number."
+#: apps/sms/models/profile.py:14
+msgid "Partner"
 msgstr ""
 
-#: apps/sms/views/joining.py:25
-msgid "The GMC ID given does not exist."
+#: apps/sms/models/profile.py:15
+msgid "National"
 msgstr ""
 
-#: apps/sms/views/reporting.py:31
-msgid "That child already exists."
+#: apps/sms/models/profile.py:16
+msgid "District"
 msgstr ""
 
-#: apps/sms/views/reporting.py:68
-msgid "That child is not registered."
+#: apps/sms/models/profile.py:17
+msgid "GMC"
+msgstr ""
+
+#: apps/webui/views/login.py:14
+msgid "Username or password did not match"
+msgstr ""
+
+#: apps/webui/views/login.py:15
+msgid "You have been logged out"
 msgstr ""

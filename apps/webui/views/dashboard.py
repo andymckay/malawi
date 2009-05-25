@@ -1,17 +1,22 @@
-from apps.sms.models.base import ReportMalnutrition, Zone, Provider, Facility
-from malnutrition.ui.views.shortcuts import as_html
-from malnutrition.utils.graph import Graphs
-
-from django.db.models import Q
-from django.core.cache import cache
- 
 import csv
 import StringIO
 from datetime import datetime
+
 from django.http import HttpResponse
+from django.db.models import Q
+from django.core.cache import cache
 
+from apps.sms.models.base import ReportMalnutrition, Zone, Provider, Facility
 from apps.webui.forms.filter import FilterForm
+from apps.shortcuts import has_access, has_roles
 
+from malnutrition.ui.views.shortcuts import as_html
+from malnutrition.utils.graph import Graphs
+from django.contrib.auth.decorators import login_required
+
+# WARNING this is far too complicated and I have plan to simplify this
+# a lot! Here be dragons!
+# 
 # zones vary by project
 def providers_by_zone(zone, *args):
     """ To find a message per region we need to go
@@ -53,7 +58,6 @@ def _zones(method, limit, root, zones, facilities, *args):
     if not _zones and facilities:
         _zones = Facility.objects.filter(facilities)
 
-    #import pdb; pdb.set_trace()
     if len(_zones) > 1:
         if root:
             providers = providers_by_zone(root, *args)
@@ -81,12 +85,10 @@ def _facilities(method, facilities, *args):
     providers = Provider.objects.filter(clinic=facility.id).values("id").distinct()
     result = [ str(p["id"]) for p in providers ]
     
-    print method
     #print result
     if result:
         res = method("AND provider_id in (%s)" % ",".join(result), 365, *args)
         data.append({ "name": facility.name, "data": res })
-    print data
     return data 
     
 def zones_plus_total(method, limit, root, zones, facilities, *args):
@@ -176,12 +178,24 @@ def _view(request, graphs, root, zones_all, facilities_all):
 
     return as_html(request, "dashboard.html", context)
 
+@login_required
 def view(request, zone_id=None, facility_id=None):
     dct = {
         "classes": { "ReportMalnutrition": ReportMalnutrition, "Zone": Zone },
         "limit": "",
     }
+    access = False
+    
     if not zone_id and not facility_id:
+        print "> here"
+        access = has_access(request)
+        print ">", access
+        if not access:
+            # according to the docs, district has access to the national page
+            print ">", access
+            access = has_roles(request.user, ["district",])
+            print ">", access
+            
         # we are at the root
         zone = None
         root = None
@@ -192,6 +206,8 @@ def view(request, zone_id=None, facility_id=None):
         zone_lookup = zones_plus_total
     elif facility_id:
         zone = Facility.objects.get(id=facility_id)
+        access = has_access(request, facility=zone)
+        
         root = zone
         zones = None
         facilities = Q(id=facility_id)
@@ -200,6 +216,8 @@ def view(request, zone_id=None, facility_id=None):
         zone_lookup = facilities_lookup
     elif zone_id:
         zone = Zone.objects.get(id=zone_id)
+        access = has_access(request, zone=zone)
+        
         root = zone
         zones = Q(head=zone)
         facilities = Q(zone=zone)
@@ -219,5 +237,7 @@ def view(request, zone_id=None, facility_id=None):
     dct["facilities"] = facilities
 
     graphs = Graphs(**dct)
-    
-    return _view(request, graphs, root, zones_all, facilities_all) 
+    if access:
+        return _view(request, graphs, root, zones_all, facilities_all) 
+    else:
+        return as_html(request, "no_access.html", {})
