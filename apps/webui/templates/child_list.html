@@ -12,7 +12,7 @@
 <script type="text/javascript">
 $("#table-2 tr").each(function() {
     var td = $(this).find("td")[10];
-    if ($(td).text() != "None") {
+    if ($(td).text() != "") {
         $(this).removeClass("even");
         $(this).css("background", "yellow !important");
     }

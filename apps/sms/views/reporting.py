@@ -1,56 +1,50 @@
-from malnutrition.forms import Form
-from malnutrition.forms import DateField, StringField, GenderField
 from malnutrition.sms.resolve import models
-
-from malnutrition.sms.views.reporting import New, Report
-from malnutrition.sms.command import authenticated, CommandError
-from malnutrition.utils.parse import years_months
-
-from apps.shortcuts import parser
-
-class NewForm(Form):
-    child = StringField(valid="(\d+)")
-    gmc = StringField(valid="(\d+)")
-    sex = GenderField()
-    dob = DateField(format="%m%d%Y")
-    dob.parser = parser
-    contact = StringField(valid="(\d+)", required=False)
-    
-class MalawiNew(New):
-    @authenticated
-    def post_init(self):
-        self.form = NewForm
-    
-    def pre_process(self):
-        years, months = years_months(self.form.clean.dob.data)
-        if years > 5:
-            raise CommandError, "You have attempted to register child #%s. However, "\
-                "the date of birth entered is %s. The age of this "\
-                "child is above 5 years. Please resend SMS with corrected "\
-                "age." % (self.form.clean.child.data, self.form.clean.dob.data.strftime("%m.%d.%Y"))
-    
-    def error_already_exists(self):
-        return "You have attempted to register child #%s in %s GMC.  However, this child already exists.  If this is an error, please resend SMS with correct information. Please this child is a replacement, please confirm registration replying D (previous child died) or R (previous child replaced in program)." % (self.form.clean.child.data, self.data.provider.clinic.name)
-
+from malnutrition.sms.views.reporting import Report
+from malnutrition.sms.command import authenticated
+from malnutrition.sms.command import CommandError
+from apps.shortcuts import last_month
 
 class MalawiReport(Report):
+    @authenticated
+    def post_init(self):
+        Report.post_init(self) 
+     
+    def error_not_registered(self):
+        return "You have attempted to record information for a child that is not yet registerd. Please register the child using the NEW command before sending this report."
+      
     def success(self):
         info = self.data.case.get_dictionary()
         info.update(self.data.provider.get_dictionary())
-        info.update(self.data.report.get_dictionary()) 
+        info.update(self.data.report.get_dictionary())
+        healthy = True
         info["status"] = "This child is healthy. Please thank the caregiver and remind her/him to return next month. "\
                          "If these measurements are not correct, please resend a corrected report immediately."
-                         
+        
         if self.data.report.status == self.data.report.MODERATE_STATUS:
+            healthy = False
             info["status"] = "This child has moderate acute malnutrition. Please refer to Supplementary Feeding Programme "\
                              "(SFP) and counsel caregiver on child nutrition."
                              
         if self.data.report.status in [self.data.report.SEVERE_STATUS, self.data.report.SEVERE_COMP_STATUS]:
+            healthy = False
             info["status"] = "This child has severe acute malnutrition. Please refer to a clinician "\
                              "immediately for admission into the NRU/TFP."
 
         if self.data.report.stunted:
+            healthy = False
             info["status"] = "This child is suffering from stunting. Please refer to the clinician immediately. %s" % info["status"]
+
+        # need to check for persistent diarrhea, if they had
+        # diarrhea, last month, let someone know
+        start, end = last_month()
+        reports = self.data.case.reportmalnutrition_set.filter(entered_at__gte=start, entered_at__lte=end)
+        for report in reports:
+            if report.observed.filter(uid="diarrhea"):
+                # diarrhea is not exclusive of the rest
+                if healthy:
+                    info["status"] = "This child has persistent diarrhea. Please refer to the clinician immediately."
+                else: 
+                    info["status"] += " This child also has persistent diarrhea."
 
         return "Thank you %(user_first_name)s %(user_last_name)s for reporting child #%(ref_id)s, "\
             "weight = %(weight)s, height = %(height)s, MUAC = %(muac)s, %(oedema)s oedema, %(diarrhea)s diarrhea. %(status)s" % info
@@ -61,7 +55,11 @@ class MalawiReport(Report):
             if field.error:
                 error_text.append("The %s entered is in error. Please correct the %s and resend a corrected report immediately." % (field.name, field.name))
         return "Thank you for reporting that child. %s" % " ".join(error_text)
-        
+    
+    def pre_process(self):
+        # convert cm to mm
+        self.form.clean.muac.data = int(self.form.clean.muac.data * 10.0)
+    
     def post_process(self):
         # the Malawi report can only contain oedema and diarrhea
         report = self.data.report

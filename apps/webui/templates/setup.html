@@ -11,5 +11,9 @@
 {{ zones|safe }}
 
 <h2>Message Log</h2>
-{{ message|safe }}
+{{ message_pass|safe }}
+
+<h2>Failed Message Log</h2>
+{{ message_fail|safe }}
+
 {% endblock %}

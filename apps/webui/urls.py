@@ -6,7 +6,9 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^$', 'apps.webui.views.dashboard.view'),
+    (r'^search/$', 'apps.webui.views.search.view'),
     (r'^zone/(?P<zone_id>\d+)/$', 'apps.webui.views.dashboard.view'),
+    (r'^facility/(?P<facility_id>\d+)/$', 'apps.webui.views.dashboard.view'),
     (r'^district/$', 'django.views.generic.simple.direct_to_template', {
         'template': 'district.html', 
         'extra_context':{"districts":Zone.objects.filter(category=5).order_by("name")}

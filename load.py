@@ -20,7 +20,8 @@ setup_environ(settings)
 
 from datetime import datetime, timedelta
 from apps.sms.models.base import ReportMalnutrition, Case, Zone, Facility
-from apps.sms.views.reporting import MalawiReport, MalawiNew
+from apps.sms.views.reporting import MalawiReport
+from apps.sms.views.adding import MalawiNew
 from apps.sms.views.joining import MalawiJoin
 
 from random import choice

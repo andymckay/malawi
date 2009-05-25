@@ -9,11 +9,13 @@ class MalawiJoin(Join):
             " If this is not correct, please re-register." % info
 
     def error_in_use(self, in_use, facility):
+        # note here we get the person that is using it info to send back
         info = in_use.get_dictionary()
         info.update(facility.get_dictionary())
+        info["username"] = self.data.username
         return "An existing user %(provider_name_inverted)s at GMC #%(codename)s"\
-            " is already registered to this phone number. "\
-            " Confirm registration by replying N (for no) or Y (for yes)." % info
+            " is already registered to this phone number."\
+            " Reply with 'CONFIRM %(username)s'." % info
                     
     def error_facility_exists(self):
         return "The GMC ID given does not exist."

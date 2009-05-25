@@ -47,16 +47,19 @@ def providers_by_zone(zone, *args):
 def _zones(method, limit, root, zones, facilities, *args):
     data = []
     # start with the root
-    if root:
-        providers = providers_by_zone(root, *args)
-        data.append({ "name": "All (%s)" % root.name, "data": method("AND provider_id in (%s)"  % (",".join(providers)), 365, *args)})
-    else:
-        data.append({ "name": "All (National)", "data": method("", 365, *args)})
-
-    # then do the zones
-    _zones = Zone.objects.filter(zones)
-    if not _zones:
+    _zones = []
+    if zones:
+        _zones = Zone.objects.filter(zones)
+    if not _zones and facilities:
         _zones = Facility.objects.filter(facilities)
+
+    #import pdb; pdb.set_trace()
+    if len(_zones) > 1:
+        if root:
+            providers = providers_by_zone(root, *args)
+            data.append({ "name": "All (%s)" % root.name, "data": method("AND provider_id in (%s)"  % (",".join(providers)), 365, *args)})
+        else:
+            data.append({ "name": "All (National)", "data": method("", 365, *args)})
 
     for area in _zones:
         providers = providers_by_zone(area, *args)
@@ -67,23 +70,35 @@ def _zones(method, limit, root, zones, facilities, *args):
             else:
                 res = method("AND provider_id in (%s)" % ",".join(providers), 365, *args)
         data.append({ "name": area.name, "data": res })
+
     return data
 
+def _facilities(method, facilities, *args):
+    #import pdb; pdb.set_trace()
+    facility = Facility.objects.filter(facilities)[0]
+    
+    data = []
+    providers = Provider.objects.filter(clinic=facility.id).values("id").distinct()
+    result = [ str(p["id"]) for p in providers ]
+    
+    print method
+    #print result
+    if result:
+        res = method("AND provider_id in (%s)" % ",".join(result), 365, *args)
+        data.append({ "name": facility.name, "data": res })
+    print data
+    return data 
+    
 def zones_plus_total(method, limit, root, zones, facilities, *args):
     """ How do we break down the reports by zone? """
     return _zones(method, limit, root, zones, facilities, *args)
 
-def _view(request, root, zones, facilities):
-    context = {}
+def facilities_lookup(method, limit, root, zones, facilities, *args):
+    #import pdb; pdb.set_trace()
+    return _facilities(method, facilities, *args)
 
-    graphs = Graphs(
-        classes={ "ReportMalnutrition": ReportMalnutrition, "Zone": Zone }, 
-        zone_lookup = zones_plus_total, 
-        zones = zones,
-        root = root,
-        limit = "",
-        facilities = facilities
-        )
+def _view(request, graphs, root, zones_all, facilities_all):
+    context = {}
 
     context["message"] = graphs.render(name="message", type=graphs.count, args=None)
     context["severe"] = graphs.render(name="severe", type=graphs.percentage_status, args=[2,3])
@@ -134,11 +149,11 @@ def _view(request, root, zones, facilities):
     
     # we want the zones for the table, but don't want to filter down onto a village (or GMC)
     # maybe, not sure
-    _zones_filter = Zone.objects.filter(zones).order_by("name")
-    _zones_list = _zones_filter
-    if not _zones_list:
-        _zones_list = Facility.objects.filter(facilities).order_by("name")
-        
+    _zones_filter = _zones_list = _facilities_list = _facility_filter = []
+    if zones_all:
+        _zones_filter = _zones_list = Zone.objects.filter(zones_all).order_by("name")
+    if facilities_all:
+        _facilities_list = _facility_filter = Facility.objects.filter(facilities_all).order_by("name")
     
     form = FilterForm(request.GET)
     zone_list = [ [z.id, z.name ] for z in _zones_list ]
@@ -147,27 +162,62 @@ def _view(request, root, zones, facilities):
     context["filter"] = form
     context["zones"] = _zones_filter
 
+    context["facilities"] = _facility_filter
+
     current = root
     context["breadcrumbs"] = [
     { "link": "/", "title":"National"},
     ]
-    if root:
+    if root and hasattr(root, "parent"):
         while current.parent():
             current = current.parent()
-            context["breadcrumbs"].append({"link": "/zone/%s/" % current.id, "title": current.name })
+            context["breadcrumbs"].insert(1, {"link": "/zone/%s/" % current.id, "title": current.name })
         context["breadcrumbs"].append({"link": "/zone/%s/" % root.id, "title": root.name }) 
-        
+
     return as_html(request, "dashboard.html", context)
 
-def view(request, zone_id=None):
-    if not zone_id:
+def view(request, zone_id=None, facility_id=None):
+    dct = {
+        "classes": { "ReportMalnutrition": ReportMalnutrition, "Zone": Zone },
+        "limit": "",
+    }
+    if not zone_id and not facility_id:
         # we are at the root
+        zone = None
         root = None
         zones = Q(category=4)
         facilities = None
-    else:
+        zones_all = Q(category=4)
+        facilities_all = facilities
+        zone_lookup = zones_plus_total
+    elif facility_id:
+        zone = Facility.objects.get(id=facility_id)
+        root = zone
+        zones = None
+        facilities = Q(id=facility_id)
+        zones_all = None
+        facilities_all = None
+        zone_lookup = facilities_lookup
+    elif zone_id:
         zone = Zone.objects.get(id=zone_id)
         root = zone
         zones = Q(head=zone)
         facilities = Q(zone=zone)
-    return _view(request, root, zones, facilities) 
+        zones_all = zones
+        facilities_all = facilities
+        zone_lookup = zones_plus_total
+    
+    filter_zone = request.GET.get("filter_zone")
+
+    if filter_zone:
+        zones = Q(id=filter_zone)
+    
+
+    dct["zones"] = zones
+    dct["zone_lookup"] = zone_lookup
+    dct["root"] = root
+    dct["facilities"] = facilities
+
+    graphs = Graphs(**dct)
+    
+    return _view(request, graphs, root, zones_all, facilities_all) 

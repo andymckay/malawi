@@ -14,7 +14,7 @@ from models.base import Provider, MessageLog
 from django.core.urlresolvers import RegexURLResolver, Resolver404
 resolver = RegexURLResolver(r'', "apps.sms.sms")
 
-from malnutrition.sms.command import HandlerFailed, authenticated, _
+from malnutrition.sms.command import HandlerFailed, FormFailed, authenticated, _
         
 class App(rapidsms.app.App):
     MAX_MSG_LEN = 140
@@ -35,7 +35,8 @@ class App(rapidsms.app.App):
         log = MessageLog(mobile=message.peer,
                          sent_by=message.sender,
                          text=message.text,
-                         was_handled=message.was_handled)
+                         was_handled=message.was_handled,
+                         form_error=getattr(message, "form_failed", False))
         log.save()
 
     def handle(self, message):
@@ -44,13 +45,20 @@ class App(rapidsms.app.App):
         except Resolver404:
             raise ValueError, "There was no view found for: %s" % message.text
 
+
         message.was_handled = True
+        message.form_failed = False
         try:
             res = callback(message, *callback_args, **callback_kwargs)
             if callable(res):
                 res = res()
-            return re
+            return message.respond(res)
+        except FormFailed, e:
+            # parsing the form failed
+            message.form_failed = True
+            return message.respond(e.message)
         except HandlerFailed, e:
+            # processing the form failed
             return message.respond(e.message)
         except:
             raise

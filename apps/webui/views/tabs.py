@@ -1,4 +1,4 @@
-from reusable_table.table import get_dict
+from reusable_table.table import get_dict, get
 from django.db.models import Q
 from malnutrition.ui.views.shortcuts import as_html, login_required
 from apps.sms.models.base import Case
@@ -32,16 +32,20 @@ def child_list(request):
     
 @login_required
 def setup(request):
-    nonhtml, tables = get_dict(request, [
+    nonhtml, tables = get(request, [
         ["facilities", Q()],
         ["zones", Q()],
-        ["message", Q()]
+        ["message", Q(form_error=False)],
+        ["message", Q(form_error=True)],
     ])
     if nonhtml:
         return nonhtml
 
     context = {}
-    context.update(tables)
+    context["facilities"] = tables[0]
+    context["zones"] = tables[1]
+    context["message_pass"] = tables[2]
+    context["message_fail"] = tables[3]
 
     return as_html(request, "setup.html", context)
     

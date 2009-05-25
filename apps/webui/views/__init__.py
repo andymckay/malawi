@@ -25,7 +25,7 @@ register("reports", ReportMalnutrition, [
     ["Oedema", "", ""],
     ["Diarrhea", "", ""], 
     ["Recieved", "entered_at", '{{ object.entered_at|date:"d M Y" }}'],
-    ["Status", "status", "{{ object.get_status_display }}"]
+    ["Status", "status", "{{ object.get_status }}"]
     ])
     
 register("providers", Provider, [
@@ -35,22 +35,23 @@ register("providers", Provider, [
     ["First name", "user__first_name", "{{ object.user.first_name }}"],
     ["Last name", "user__last_name", "{{ object.user.last_name }}"],
     ["Mobile", "mobile", "{{ object.mobile }}"],
-    ["Quantity", "", "{{ object.quantity }}"],
+    ["Quantity Pass", "", "{{ object.quantity_pass }}"],
+    ["Quantity Fail", "", "{{ object.quantity_fail }}"],
     ])
 
 register("facilities", Facility, [
     ["Id", "", "#{{ object.codename }}"],
     ["Name", "name", "{{ object.name }}"],
     ["District", "", "{{ object.zone.name }}"],
-    ["Longitude", "long", "{{ object.longitude }}"],
-    ["Latitude", "lat", "{{ object.latitude }}"]
+    ["Longitude", "long", "{{ object.lon }}"],
+    ["Latitude", "lat", "{{ object.lat }}"]
 ])
 
 register("zones", Zone, [
     ["Name", "name", "{{ object.name }}"],
     ["Parent", "", "{{ object.head.name }}"],
-    ["Longitude", "long", "{{ object.longitude }}"],
-    ["Latitude", "lat", "{{ object.latitude }}"]
+    ["Longitude", "long", "{{ object.lon }}"],
+    ["Latitude", "lat", "{{ object.lat }}"]
 ])
 
 register("message", MessageLog, [
@@ -58,5 +59,5 @@ register("message", MessageLog, [
         ["Message", "text", "{{ object.text }}"],
         ["Sent by", "sent_by", "{{ object.sent_by }}"],        
         ["Created", "created_at", '{{ object.created_at|date:"d/m/Y" }}'],
-        ["Handled", "handled", "{{ object.get_handled_display }}"]
+        ["Error", "form_error", "{{ object.form_error }}"]
         ])

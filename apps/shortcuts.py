@@ -11,5 +11,11 @@ def last_month():
     end = datetime(year=previous.year, month=previous.month, day=previous.day)
     return beginning, end
 
+def this_month():
+    now = datetime.now()
+    beginning = datetime(year=now.year, month=now.month, day=1)
+    end = datetime(year=now.year, month=now.month, day=now.day)
+    return beginning, end
+
 if __name__=="__main__":
     print last_month()

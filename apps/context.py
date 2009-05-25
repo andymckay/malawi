@@ -1,3 +1,5 @@
+from django.conf import settings
+
 def processor(self):
     context = {
         "site": { "title": "Malawi",
@@ -10,5 +12,6 @@ def processor(self):
                   { "link": "/setup/", "title": "Setup"},
                   ]
                  },
+        "settings": settings,
     }
     return context

@@ -3,9 +3,9 @@
     "pk": 1, 
     "model": "sms.observation", 
     "fields": {
-      "letter": "e", 
-      "uid": "edema", 
-      "name": "Edema"
+      "letter": "o", 
+      "uid": "oedema", 
+      "name": "Oedema"
     }
   }, 
   {
@@ -96,15 +96,6 @@
       "letter": "cv", 
       "uid": "fits", 
       "name": "Fits/Convulsions"
-    }
-  },
-  {
-    "pk": 12,
-    "model": "sms.observation", 
-    "fields": {
-      "letter": "o", 
-      "uid": "oedema", 
-      "name": "Oedema"
     }
   }
 ]
