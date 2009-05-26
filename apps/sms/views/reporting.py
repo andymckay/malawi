@@ -17,6 +17,7 @@ class MalawiReport(Report):
         clinic = self.data.provider.clinic
         self.data.case.facility = clinic
         self.data.case.zone = clinic.parent()
+        self.data.case.save()
         
         info = self.data.case.get_dictionary()
         info.update(self.data.provider.get_dictionary())

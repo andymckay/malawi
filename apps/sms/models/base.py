@@ -11,12 +11,15 @@ class Zone(zone.Zone):
 
     def get_absolute_url(self):
         return "/zone/edit/%s/" % self.id
-        
+    
+    def get_child_ids(self):
+        return [ str(i["id"]) for i in self.__class__.objects.filter(head=self).values("id") ]
+    
 class Facility(facility.Facility):
     class Meta(facility.Facility.Meta):
         app_label = "sms"
-        ordering = ("name",)
-        
+        ordering = ("name",)    
+    
     def parent(self):
         return self.zone
 
