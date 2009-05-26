@@ -49,8 +49,8 @@ def child_list(request):
     if not has_roles(request.user, "partner"):
         providers = get_providers(request.user)
     nonhtml, tables = get_dict(request, [
-        ["case",  Q(id__in=providers)],
-        ["reports",  Q(id__in=providers)]
+        ["case",  Q(provider__in=providers)],
+        ["reports",  Q(provider__in=providers)]
     ])
     if nonhtml:
         return nonhtml
