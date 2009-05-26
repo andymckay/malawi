@@ -70,11 +70,9 @@ class MalawiReport(Report):
         report = self.data.report
         if self.form.clean.oedema.data:
             report.observed.add(models.Observation.objects.get(uid="oedema"))
-            print "Setting", models.Observation.objects.get(uid="oedema")
             if report.status not in [report.SEVERE_STATUS, report.SEVERE_COMP_STATUS]:
                 report.status = report.SEVERE_STATUS
                 
         if self.form.clean.diarrhea.data:
             report.observed.add(models.Observation.objects.get(uid="diarrhea"))
-            print "Setting", models.Observation.objects.get(uid="diarrhea")
         self.data.report.save()
