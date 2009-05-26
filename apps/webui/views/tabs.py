@@ -11,11 +11,11 @@ from apps.shortcuts import has_access, has_roles, get_providers
 
 @login_required
 def hsa(request):
-    providers = []
+    q = Q()
     if not has_roles(request.user, "partner"):
-        providers = get_providers(request.user)
+        q = get_providers(request.user)
     nonhtml, tables = get_dict(request, [
-        ["providers", Q(id__in=providers)],
+        ["providers", q],
     ])
     if nonhtml:
         return nonhtml
@@ -45,12 +45,13 @@ def gmc(request):
 
 @login_required
 def child_list(request):
-    providers = []
+    q = Q()
     if not has_roles(request.user, "partner"):
-        providers = get_providers(request.user)
+        q = Q(provider__in=get_providers(request.user))
+
     nonhtml, tables = get_dict(request, [
-        ["case",  Q(provider__in=providers)],
-        ["reports",  Q(provider__in=providers)]
+        ["case", q],
+        ["reports", q]
     ])
     if nonhtml:
         return nonhtml
