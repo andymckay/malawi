@@ -13,7 +13,7 @@ from apps.shortcuts import has_access, has_roles, get_providers
 def hsa(request):
     q = Q()
     if not has_roles(request.user, "partner"):
-        q = get_providers(request.user)
+        q = Q(id__in=get_providers(request.user))
     nonhtml, tables = get_dict(request, [
         ["providers", q],
     ])

@@ -200,7 +200,7 @@ def view(request, zone_id=None, facility_id=None):
     filter_zone = request.GET.get("filter_zone")
 
     # this is used to show the filters on the right of the screen
-    dct["zones_unfiltered"] = zones[]
+    dct["zones_unfiltered"] = zones
 
     if filter_zone:
         zones = Q(id=filter_zone)
