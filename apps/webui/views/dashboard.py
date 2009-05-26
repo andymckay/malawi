@@ -105,8 +105,8 @@ def _view(request, graphs, root, zones_all, facilities_all):
     context["message"] = graphs.render(name="message", type=graphs.count, args=None)
     context["severe"] = graphs.render(name="severe", type=graphs.percentage_status, args=[2,3])
     context["moderate"] = graphs.render(name="moderate", type=graphs.percentage_status, args=[1,])
-    context["oedema"] = graphs.render(name="oedema", type=graphs.percentage_observation, args=12)
-    context["diarrhea"] = graphs.render(name="diarrhea", type=graphs.percentage_observation, args=2)
+    context["oedema"] = graphs.render(name="oedema", type=graphs.percentage_observation, args=1)
+    context["diarrhea"] = graphs.render(name="diarrhea", type=graphs.percentage_observation, args=3)
     context["muac"] = graphs.render(name="muac", type=graphs.average, args="muac")
     context["weight"] = graphs.render(name="weight", type=graphs.average, args="weight")
     context["height"] = graphs.render(name="height", type=graphs.average, args="height")
@@ -187,14 +187,10 @@ def view(request, zone_id=None, facility_id=None):
     access = False
     
     if not zone_id and not facility_id:
-        print "> here"
         access = has_access(request)
-        print ">", access
         if not access:
             # according to the docs, district has access to the national page
-            print ">", access
             access = has_roles(request.user, ["district",])
-            print ">", access
             
         # we are at the root
         zone = None

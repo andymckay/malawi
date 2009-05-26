@@ -53,10 +53,10 @@ fm = FakeMessage("1234560")
 # Mkanda > Kaigwazanga
 MalawiJoin(fm, "16 Andy McKay")()
 MalawiNew(fm, "51 16 M 19102008 123124124")()
-muac = 120
+muac = 12
 height = 90
 for x in range(0, 100):
-    muac -= 1
+    muac -= 0.1
     height -= 0.5
     MalawiReport(fm, "51 21.2 %s %s N Y" % (height, muac))()
     res = ReportMalnutrition.objects.filter(case=2).latest("entered_at")
@@ -68,12 +68,12 @@ fm = FakeMessage("999999")
 
 MalawiJoin(fm, "126 Coulibaly Mariam")()
 MalawiNew(fm, "70 1201 M 19102008 123124124")()
-muac = 150
+muac = 15
 height = 10
 for x in range(0, 100):
-    muac -= 1
+    muac -= 0.1
     height += 0.5
-    MalawiReport(fm, "70 24.2 95.5 %s N Y" % muac)()
+    MalawiReport(fm, "70 24.2 9.5 %s N Y" % muac)()
     res = ReportMalnutrition.objects.filter(case=3).latest("entered_at")
     res.entered_at = now - timedelta(days=x * 2)
     res.save()
@@ -82,10 +82,10 @@ fm = FakeMessage("999299")
 # this is Changata, a GMC in the Southeern Region > Thyolo
 MalawiJoin(fm, "127 Coulibaly Mariam")()
 MalawiNew(fm, "71 1201 M 19102008 123124124")()
-muac = 152
+muac = 15
 height = 30
 for x in range(0, 100):
-    muac -= 1.1
+    muac -= 0.11
     height += 0.5
     MalawiReport(fm, "71 25.2 95.5 %s N Y" % muac)()
     res = ReportMalnutrition.objects.filter(case=4).latest("entered_at")
