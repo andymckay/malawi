@@ -4,7 +4,7 @@
 {% block content %}
 <p>Please pick a district:</p>
 {% if districts %}
-<ul>
+<ul class="column">
     {% for district in districts %}
     <li><a href="/zone/{{ district.id }}/">{{ district.name }}</li> 
     {% endfor %}

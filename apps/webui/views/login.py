@@ -1,6 +1,9 @@
 from django.http import HttpResponseRedirect
 from django.contrib import auth
 from django.utils.translation import ugettext_lazy as _
+from django.db.models import ObjectDoesNotExist
+
+from apps.shortcuts import has_roles
 
 from malnutrition.ui.forms.login import LoginForm
 from malnutrition.ui.views.shortcuts import as_html
@@ -29,7 +32,15 @@ def login(request):
                 if user:
                     if user.is_active:
                         auth.login(request, user)
+                        if has_roles(user, ["gmc",]):
+                            try:
+                                facility = user.get_profile().facility.id
+                                return HttpResponseRedirect("/facility/%s/" % facility)
+                            except (ObjectDoesNotExist, AttributeError):
+                                pass 
+                                
                         return HttpResponseRedirect("/")
+                        
                 return HttpResponseRedirect("/accounts/login/?msg=login_failed")
     else:
         form = LoginForm()

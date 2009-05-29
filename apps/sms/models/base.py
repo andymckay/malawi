@@ -81,7 +81,7 @@ class ReportMalnutrition(report.ReportMalnutrition):
         if not res:
             res = ""
         return res
-
+            
 class Provider(provider.Provider):
     class Meta(provider.Provider.Meta):
         app_label = "sms"

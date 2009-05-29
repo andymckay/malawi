@@ -4,7 +4,7 @@
 {% block content %}
 <p>Please pick a GMC</p>
 {% if facilities %}
-<ul>
+<ul class="column">
     {% for facility in facilities %}
     <li><a href="/facility/{{ facility.id }}/">{{ facility.name }}</li>
     {% endfor %}

@@ -10,7 +10,7 @@
 <a href="?filter_zone={{ zone.id }}" longitude="{{ zone.lon }}" latitude="{{ zone.lat }}">{{ zone.name }}</a><br />
 {% endfor %}
 </p>
-<h2>Drill down</h2>
+<h2>Breakout</h2>
 <p>
 {% for zone in zones %}
 <a href="/zone/{{ zone.id }}/">{{ zone.name }}</a><br />
@@ -18,7 +18,7 @@
 </p>
 {% endif %}
 {% if facilities %}
-<h2>Drill down</h2>
+<h2>Breakout</h2>
 <p>
 {% for facility in facilities %}
 <a href="/facility/{{ facility.id }}/">{{ facility.name }}</a><br />
@@ -47,12 +47,12 @@
                 {% if forloop.first %}
                 <td>{{ entry|title }}</td>
                 {% else %}
-                <td>{{ entry.message|stringformat:".2f" }}</td>
-                <td>{{ entry.moderate|stringformat:".2f" }}</td>
-                <td>{{ entry.severe|stringformat:".2f" }}</td>
-                <td>{{ entry.stunting|stringformat:".2f" }}</td>
-                <td>{{ entry.oedema|stringformat:".2f" }}</td>
-                <td>{{ entry.diarrhea|stringformat:".2f" }}</td>
+                <td>{{ entry.message }}</td>
+                <td>{{ entry.moderate|stringformat:".2f" }}{% if entry.moderate %}%{% endif %}</td>
+                <td>{{ entry.severe|stringformat:".2f" }}{% if entry.severe %}%{% endif %}</td>
+                <td>{{ entry.stunting|stringformat:".2f" }}{% if entry.stunting %}%{% endif %}</td>
+                <td>{{ entry.oedema|stringformat:".2f" }}{% if entry.oedema %}%{% endif %}</td>
+                <td>{{ entry.diarrhea|stringformat:".2f" }}{% if entry.diarrhea %}%{% endif %}</td>
                 {% endif %}
             {% endfor %}
         </tr>
@@ -64,11 +64,11 @@
 {{ message.javascript|safe }}
 <p><a href="?export=message">Export graph data</a></p>
 
-<h2>% Severe Malnutrition</h2>
+<h2>% Severe Acute Malnutrition</h2>
 {{ severe.javascript|safe }}
 <p><a href="?export=severe">Export graph data</a></p>
 
-<h2>% Moderate Malnutrition</h2>
+<h2>% Moderate Acute Malnutrition</h2>
 {{ moderate.javascript|safe }}
 <p><a href="?export=moderate">Export graph data</a></p>
 
@@ -84,17 +84,6 @@
 {{ diarrhea.javascript|safe }}
 <p><a href="?export=diarrhea">Export graph data</a></p> 
 
-<h2>Average MUAC</h2>
-{{ muac.javascript|safe }}
-<p><a href="?export=muac">Export graph data</a></p>
-
-<h2>Average Height</h2>
-{{ height.javascript|safe }}
-<p><a href="?export=height">Export graph data</a></p>
-
-<h2>Average Weight</h2>
-{{ weight.javascript|safe }}
-<p><a href="?export=weight">Export graph data</a></p>
 
 <p id="map" class="span-20" style="height: 400px" />
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{ settings.GOOGLE_MAPS_API_KEY }}" type="text/javascript"></script>

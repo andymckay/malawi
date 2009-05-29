@@ -34,7 +34,7 @@ def has_roles(user, roles=[]):
 
     try:
         profile = user.get_profile()
-    except ObjectDoesNotExist:
+    except (ObjectDoesNotExist, AttributeError):
         log("No profile, no access")
         return False
     

@@ -1,17 +1,21 @@
 from django.conf import settings
+from apps.shortcuts import has_roles
 
 def processor(self):
+    user = self.user
+    tabs = []
+    if has_roles(user, ["partner", "national", "district"]):
+        tabs.append({ "link": "/", "title": "National" })
+        tabs.append({ "link": "/district/", "title": "District"})
+    if has_roles(user, ["partner", "national", "district", "gmc"]):
+        tabs.append({ "link": "/gmc/", "title": "GMC"})
+        tabs.append({ "link": "/child/", "title": "Child"})
+        tabs.append({ "link": "/hsa/", "title": "HSA"})
+    if has_roles(user, ["partner", "national", "district"]):
+        tabs.append({ "link": "/setup/", "title": "Setup"})
     context = {
         "site": { "title": "Malawi",
-                  "tabs": [
-                  { "link": "/", "title": "National"},
-                  { "link": "/district/", "title": "District"}, 
-                  { "link": "/gmc/", "title": "GMC"},
-                  { "link": "/child/", "title": "Child"},
-                  { "link": "/hsa/", "title": "HSA"},
-                  { "link": "/setup/", "title": "Setup"},
-                  ]
-                 },
+                  "tabs": tabs },
         "settings": settings,
     }
     return context

@@ -28,7 +28,7 @@ def hsa(request):
 @login_required
 def district(request):
     districts = []
-    for district in Zone.objects.filter().order_by("name"):
+    for district in Zone.objects.filter(category=5).order_by("name"):
         if has_access(request, zone=district):
             districts.append(district)
             
@@ -49,15 +49,18 @@ def child_list(request):
     if not has_roles(request.user, "partner"):
         q = Q(provider__in=get_providers(request.user))
 
-    nonhtml, tables = get_dict(request, [
-        ["case", q],
-        ["reports", q]
+    nonhtml, tables = get(request, [
+        ["case", q & Q(active=True)],
+        ["reports", q],
+        ["case", q & Q(active=False)]
     ])
     if nonhtml:
         return nonhtml
 
     context = {}
-    context.update(tables)
+    context["active"] = tables[0]
+    context["reports"] = tables[1]
+    context["inactive"] = tables[2]
 
     return as_html(request, "child_list.html", context)
     
@@ -66,7 +69,8 @@ def child_list(request):
 def setup(request):
     nonhtml, tables = get(request, [
         ["facilities", Q()],
-        ["zones", Q()],
+        ["zones", Q(category=5)],
+        ["zones", Q(category=4)],
         ["message", Q(form_error=False)],
         ["message", Q(form_error=True)],
     ])
@@ -75,9 +79,10 @@ def setup(request):
 
     context = {
         "facilities": tables[0],
-        "zones": tables[1],
-        "message_pass": tables[2],
-        "message_fail": tables[3]
+        "regions": tables[1],
+        "districts": tables[2],
+        "message_pass": tables[3],
+        "message_fail": tables[4]
     }
 
     return as_html(request, "setup.html", context)

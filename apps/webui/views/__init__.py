@@ -3,28 +3,29 @@ from reusable_table.table import register
 from apps.sms.models.base import Case, ReportMalnutrition, Provider, Facility, Zone, MessageLog
 
 register("case", Case, [
+    ["Child#", "ref_id", "{{ object.ref_id }}"],
     ["District", "provider__clinic__zone__name", "{{ object.provider.clinic.zone.name }}"],
     ["GMC", "provider__clinic__name", "{{ object.provider.clinic.name }}"],
-    ["Child#", "ref_id", "{{ object.ref_id }}"],
-    ["Age (months)", "dob", "{{ object.months }}"],
+    ["Months", "dob", "{{ object.months }}"],
     ["Gender", "gender", "{{ object.gender }}"],
     ["Contact", "contact", "{{ object.contact }}"],
-    ["Date registered", "created_at", '{{ object.created_at|date:"d M Y" }}'],
-    ["Current Nutritional Status", "", "{{ object.reportmalnutrition_set.latest.get_status_display }}"],
-    ["Last Date of Child Visit", "", '{{ object.reportmalnutrition_set.latest.entered_at|date:"d M Y" }}']
+    ["Registered", "created_at", '{{ object.created_at|date:"d M y H:i" }}'],
+    ["Nutritional Status", "", "{{ object.reportmalnutrition_set.latest.get_status_display }}"],
+    ["Last Visit", "", '{{ object.reportmalnutrition_set.latest.entered_at|date:"d M y H:i" }}'],
+    ["ID", "id", "{{ object.id }}"]
     ])
         
 register("reports", ReportMalnutrition, [
     ["District", "case__provider__clinic__zone__name", "{{ object.case.provider.clinic.zone.name }}"],
     ["GMC", "case__provider__clinic__name", "{{ object.case.provider.clinic.name }}"],
-    ["Reporter", "case__provider__mobile", "{{ object.case.provider }}"],
+    ["HSA", "case__provider__mobile", "{{ object.case.provider }}"],
     ["Child#", "case__ref_id", "{{ object.case.ref_id }}"],
     ["Height", "height", "{{ object.height }}"],
     ["Weight", "weight", "{{ object.weight }}"],
     ["MUAC", "muac", "{{ object.muac }}"],
-    ["Oedema", "", ""],
-    ["Diarrhea", "", ""], 
-    ["Recieved", "entered_at", '{{ object.entered_at|date:"d M Y" }}'],
+    ["Oedema", "", "{{ object.get_dictionary.oedema }}"],
+    ["Diarrhea", "", "{{ object.get_dictionary.diarrhea }}"], 
+    ["Recieved", "entered_at", '{{ object.entered_at|date:"d M y H:i" }}'],
     ["Status", "status", "{{ object.get_status }}"]
     ])
     

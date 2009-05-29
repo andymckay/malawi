@@ -5,16 +5,18 @@
 <dl>
     <dt>Case ID #</dt>
     <dd>{{ object.ref_id }}</dd>
+    <dt>Unique ID</dt>
+    <dd>{{ object.id }} (<span class="quiet">This is used to distinguish between multiple children of the same Case ID.</span>)</dd>
     <dt>Gender</dt>
     <dd>{{ object.get_gender_display }}</dd>
     <dt>Date of Birth</dt>
     <dd>{{ object.dob|date:"D d m Y"}}</dd>
-    <dt>Provider</dt>
+    <dt>HSA</dt>
     <dd><a href="{{ object.provider.get_absolute_url }}">{{ object.provider }}</a></dd>
     <dt>Created at</dt>
     <dd>{{ object.created_at|date:"D d m Y"}}</dd>
 </dl>
-<h2>Reports</h2>
+<h2>HSA</h2>
 {{ reports|safe }}
 
 {% endblock %}

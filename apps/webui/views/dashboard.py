@@ -60,9 +60,6 @@ def _view(request, graphs, root):
     context["moderate"] = graphs.render(name="moderate", type=graphs.percentage_status, args=[1,])
     context["oedema"] = graphs.render(name="oedema", type=graphs.percentage_observation, args=[1,])
     context["diarrhea"] = graphs.render(name="diarrhea", type=graphs.percentage_observation, args=[3,])
-    context["muac"] = graphs.render(name="muac", type=graphs.average, args=["muac",])
-    context["weight"] = graphs.render(name="weight", type=graphs.average, args=["weight",])
-    context["height"] = graphs.render(name="height", type=graphs.average, args=["height",])
     context["stunting"] = graphs.render(name="stunting", type=graphs.percentage_stunting, args=[])
     
     export = request.GET.get("export", None)
