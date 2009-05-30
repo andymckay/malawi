@@ -43,6 +43,7 @@ urlpatterns = patterns('',
     }),
     
     (r'^hsa/edit/(?P<object_id>\d+)/$', 'apps.webui.views.setup.hsa_edit'),
+    (r'^hsa/msg/(?P<object_id>\d+)/$', 'apps.webui.views.setup.hsa_msg'),
     (r'^hsa/add/$', 'apps.webui.views.setup.hsa_add'),
     (r'^child/$', 'apps.webui.views.tabs.child_list'),
     (r'^child/view/(?P<object_id>\d+)/$', 'apps.webui.views.tabs.child_view'),

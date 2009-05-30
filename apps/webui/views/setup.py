@@ -1,12 +1,15 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseRedirect
 from django.db.models import Q
+from django.db.models import ObjectDoesNotExist
 
 from apps.webui.forms.models import ProviderForm, UserForm
+from apps.webui.forms.message import MessageForm
 from apps.sms.models.base import Provider
 
 from malnutrition.ui.views.shortcuts import as_html
 from malnutrition.ui.views.shortcuts import login_required
+from malnutrition.ui.views.message import message_users
 
 from reusable_table.table import get_dict
 
@@ -35,6 +38,17 @@ def hsa_add(request):
 
 @login_required
 @user_passes_test(lambda u: u.is_staff )
+def hsa_msg(request, object_id):
+    provider = Provider.objects.get(id=object_id)
+    message_form = MessageForm(request.POST or None)
+    mobile = request.user.provider.mobile
+    if message_form.is_valid():
+        message_users(mobile=mobile, message=message_form.cleaned_data["message"], users=[provider.id,])
+        
+    return HttpResponseRedirect(provider.get_absolute_url())
+    
+@login_required
+@user_passes_test(lambda u: u.is_staff )
 def hsa_edit(request, object_id):
     provider = Provider.objects.get(id=object_id)
     context = {}
@@ -51,6 +65,13 @@ def hsa_edit(request, object_id):
     
     context["provider_form"] = provider_form
     context["user_form"] = user_form
+    context["message_form"] = MessageForm(request.POST or None)
+    
+    try:
+        context["mobile"] = request.user.provider.mobile
+    except ObjectDoesNotExist:
+        context["mobile"] = False
+        
     context["object"] = provider
     return as_html(request, "user_edit_form.html", context)
 

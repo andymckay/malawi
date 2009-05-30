@@ -1,9 +1,20 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<h2>Editing #{{ object.id }}</h2>
+<h2>Message HSA #{{ object.id }}</h2>
+{% if mobile %}
+<p>The message will be sent as if from: {{ mobile }}.</p>
+<form method="POST" action="/hsa/msg/{{ object.id }}/">
+    <fieldset>
+        {{ message_form.as_custom }}
+        <div><input type="submit" value="Message" /></div>
+    </fieldset>
+</form>
+{% else %}
+<p>You do not have a mobile number registered to this account, you can't message the user.</p>
+{% endif %}
 
-<p>If you don't wish to make any changes, you can <a href="/setup/">return to setup</a></p>
+<h2>Editing #{{ object.id }}</h2>
 
 <form method="POST">
     <fieldset>

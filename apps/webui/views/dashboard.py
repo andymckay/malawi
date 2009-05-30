@@ -75,18 +75,25 @@ def _view(request, graphs, root):
 
 def _csv_export(context, export):
     """ Did the user ask for a csv export? if so.... """
-    data = context.get(export, None)
+    if export == "all":
+        exports = context.keys()
+    else:
+        exports = [export,]
+        
     output = StringIO.StringIO()
     csvio = csv.writer(output)
-    header = False
-    for row in data.data:
-        if not header:
-            csvrow = [export,] + ([datetime.fromtimestamp(float(f[0])/1000).date() for f in row["data"]])
-            csvio.writerow(csvrow)
-            header = True
+        
+    for export in exports:
+        data = context.get(export, None)
+        header = False
+        for row in data.data:
+            if not header:
+                csvrow = [export,] + ([datetime.fromtimestamp(float(f[0])/1000).date() for f in row["data"]])
+                csvio.writerow(csvrow)
+                header = True
 
-        csvrow = [row["name"], ] + [f[1] for f in row["data"]]
-        csvio.writerow(csvrow)
+            csvrow = [row["name"], ] + [f[1] for f in row["data"]]
+            csvio.writerow(csvrow)
         
     response = HttpResponse(mimetype='text/csv')
     response['Content-Disposition'] = 'attachment; filename=report.csv'    
