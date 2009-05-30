@@ -12,6 +12,9 @@ class Zone(zone.Zone):
     def get_absolute_url(self):
         return "/zone/edit/%s/" % self.id
     
+    def get_filter_url(self):
+        return "/zone/%s/" % self.id
+    
     def get_child_ids(self):
         return [ str(i["id"]) for i in self.__class__.objects.filter(head=self).values("id") ]
     
@@ -22,6 +25,9 @@ class Facility(facility.Facility):
     
     def parent(self):
         return self.zone
+
+    def get_filter_url(self):
+        return "/facility/%s/" % self.id
 
     def get_absolute_url(self):
         return "/gmc/edit/%s/" % self.id

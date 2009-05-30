@@ -4,16 +4,16 @@
 {% block bar %}
 {% if zones %}
 <h2>Filter</h2>
-<p id="zones">
-<a href="?" longitude="None" latitude="None">All (Reset)</a><br />
+<p>
+<a href="?">All (Reset)</a><br />
 {% for zone in zones %}
-<a href="?filter_zone={{ zone.id }}" longitude="{{ zone.lon }}" latitude="{{ zone.lat }}">{{ zone.name }}</a><br />
+<a href="?filter_zone={{ zone.id }}">{{ zone.name }}</a><br />
 {% endfor %}
 </p>
 <h2>Breakout</h2>
 <p>
 {% for zone in zones %}
-<a href="/zone/{{ zone.id }}/">{{ zone.name }}</a><br />
+<a href="{{ zone.get_filter_url }}">{{ zone.name }}</a><br />
 {% endfor %}
 </p>
 {% endif %}
@@ -21,7 +21,7 @@
 <h2>Breakout</h2>
 <p>
 {% for facility in facilities %}
-<a href="/facility/{{ facility.id }}/">{{ facility.name }}</a><br />
+<a href="{{ facility.get_filter_url }}">{{ facility.name }}</a><br />
 {% endfor %}
 </p>
 {% endif %}
@@ -43,16 +43,15 @@
     <tbody>
         {% for row in lastmonth %}
         <tr>
-            {% for entry in row %}    
-                {% if forloop.first %}
-                <td>{{ entry|title }}</td>
-                {% else %}
-                <td>{{ entry.message }}</td>
-                <td>{{ entry.moderate|stringformat:".2f" }}{% if entry.moderate %}%{% endif %}</td>
-                <td>{{ entry.severe|stringformat:".2f" }}{% if entry.severe %}%{% endif %}</td>
-                <td>{{ entry.stunting|stringformat:".2f" }}{% if entry.stunting %}%{% endif %}</td>
-                <td>{{ entry.oedema|stringformat:".2f" }}{% if entry.oedema %}%{% endif %}</td>
-                <td>{{ entry.diarrhea|stringformat:".2f" }}{% if entry.diarrhea %}%{% endif %}</td>
+            {% for entry in row %}
+                {% if forloop.first %}{% else %}
+                <td><a href="{{ entry.zone.get_filter_url }}" longitude="{{ entry.zone.lon }}" latitude="{{ entry.zone.lat }}">{{ entry.name|title }}</a></td>
+                <td>{{ entry.data.message }}</td>
+                <td>{{ entry.data.moderate|stringformat:".2f" }}{% if entry.data.moderate %}%{% endif %}</td>
+                <td>{{ entry.data.severe|stringformat:".2f" }}{% if entry.data.severe %}%{% endif %}</td>
+                <td>{{ entry.data.stunting|stringformat:".2f" }}{% if entry.data.stunting %}%{% endif %}</td>
+                <td>{{ entry.data.oedema|stringformat:".2f" }}{% if entry.data.oedema %}%{% endif %}</td>
+                <td>{{ entry.data.diarrhea|stringformat:".2f" }}{% if entry.data.diarrhea %}%{% endif %}</td>
                 {% endif %}
             {% endfor %}
         </tr>
@@ -111,10 +110,29 @@ $(document).ready(function(){
             var marker = new GMarker(latlng);
             map.addOverlay(marker);
             GEvent.addListener(marker, "click", function() {
-              marker.openInfoWindowHtml('<a href="' + a.attr("href") + '">' + a.text() + '</a>');
+                console.log(a.parent().text());
+              marker.openInfoWindowHtml(a.parent().html());
             });
         };
     });
 });
 </script>
+<ul id="zones" style="display:none">
+    {% for row in lastmonth %}
+        {% for entry in row %}
+            {% if forloop.first %}{% else %}
+            <p>
+                <a href="{{ entry.zone.get_filter_url }}" longitude="{{ entry.zone.lon }}" latitude="{{ entry.zone.lat }}">{{ entry.name|title }}</a><br />
+                <b>Messages</b>: {{ entry.data.message }}<br />
+                <b>Moderate</b>: {{ entry.data.moderate|stringformat:".2f" }}{% if entry.data.moderate %}%{% endif %}<br />
+                <b>Severe</b>: {{ entry.data.severe|stringformat:".2f" }}{% if entry.data.severe %}%{% endif %}<br />
+                <b>Stunting</b>: {{ entry.data.stunting|stringformat:".2f" }}{% if entry.data.stunting %}%{% endif %}<br />
+                <b>Oedmea</b>: {{ entry.data.oedema|stringformat:".2f" }}{% if entry.data.oedema %}%{% endif %}<br />
+                <b>Diarrhea</b>: {{ entry.data.diarrhea|stringformat:".2f" }}{% if entry.data.diarrhea %}%{% endif %}<br /> 
+            </p>
+            {% endif %}
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</ul>
 {% endblock %}

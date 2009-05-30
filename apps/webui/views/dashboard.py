@@ -24,15 +24,15 @@ def _zones(self):
         ids.append(str(zone.id))
         if self.zones:
             if self.limit:
-                data.append({ "name": zone.name, "limit": "%s AND zone_id in (%s)" % (self.limit, ",".join(zones)) })
+                data.append({ "zone": zone, "name": zone.name, "limit": "%s AND zone_id in (%s)" % (self.limit, ",".join(zones)) })
             else:
-                data.append({ "name": zone.name, "limit": "AND zone_id in (%s)" % ",".join(zones) })
+                data.append({ "zone": zone, "name": zone.name, "limit": "AND zone_id in (%s)" % ",".join(zones) })
             
     if len(ids) > 1:
         if self.root:
-            data.insert(0, { "name": "All (%s)" % self.root.name, "limit": "AND zone_id in (%s)"  % (",".join(ids))})
+            data.insert(0, { "zone": zone, "name": "All (%s)" % self.root.name, "limit": "AND zone_id in (%s)"  % (",".join(ids))})
         else:
-            data.insert(0, { "name": "All (National)", "limit": "" })
+            data.insert(0, { "zone": zone, "name": "All (National)", "limit": "" })
     
     return data 
 
@@ -44,10 +44,10 @@ def _facilities(self):
     
     for facility in facilities:
         ids.append(str(facility.id))
-        data.append({ "name": facility.name, "limit": "AND facility_id = %s" % facility.id},)
+        data.append({ "zone": facility, "name": facility.name, "limit": "AND facility_id = %s" % facility.id},)
     
     if len(ids) > 1:
-        data.insert(0, { "name": "All (%s)" % self.root.name, "limit": "AND facility_id in (%s)"  % (",".join(ids))})
+        data.insert(0, { "zone": facility, "name": "All (%s)" % self.root.name, "limit": "AND facility_id in (%s)"  % (",".join(ids))})
 
     return data
 
@@ -103,10 +103,10 @@ def _setup_last_month(context):
             for region in v.data:
                 key = region["name"]
                 if not lastmonthdata.has_key(key):
-                    lastmonthdata[key] = {}
+                    lastmonthdata[key] = { "zone":region["zone"], "name": key, "data": {}}
 
                 if region["data"]:
-                    lastmonthdata[key][k] = region["data"][-1][1]
+                    lastmonthdata[key]["data"][k] = region["data"][-1][1]
 
     lastmonth = list(lastmonthdata.items())
     lastmonth.sort()
@@ -140,8 +140,8 @@ def _add_breadcrumbs(root):
     if root and hasattr(root, "parent"):
         while current.parent():
             current = current.parent()
-            breadcrumbs.insert(1, {"link": "/zone/%s/" % current.id, "title": current.name })
-        breadcrumbs.append({"link": "/zone/%s/" % root.id, "title": root.name })
+            breadcrumbs.insert(1, {"link": root.get_absolute_url(), "title": current.name })
+        breadcrumbs.append({"link": root.get_absolute_url(), "title": root.name })
     return breadcrumbs
 
 @login_required

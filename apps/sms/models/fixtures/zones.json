@@ -6,9 +6,9 @@
       "category": 4, 
       "head": null, 
       "name": "North Region", 
-      "lon": null, 
+      "lon": 33.7, 
       "number": 1, 
-      "lat": null
+      "lat": -12.95
     }
   }, 
   {
@@ -18,9 +18,9 @@
       "category": 4, 
       "head": null, 
       "name": "Central Region", 
-      "lon": null, 
+      "lon": 33.7, 
       "number": 2, 
-      "lat": null
+      "lat": -13.95
     }
   }, 
   {
@@ -30,9 +30,9 @@
       "category": 4, 
       "head": null, 
       "name": "Southern Region", 
-      "lon": null, 
+      "lon": 33.7, 
       "number": 3, 
-      "lat": null
+      "lat": -14.95
     }
   }, 
   {
