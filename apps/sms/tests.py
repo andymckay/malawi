@@ -43,9 +43,9 @@ class TestApp (TestScript):
         1234569 < Name = Danae Mckay, GMC = Salima 1201, Phone number = 1234569. If this is not correct, please re-register.
 
         1234569 > JOIN 1201 Andy McKay 
-        1234569 < An existing user Danae Mckay at GMC #1201 is already registered to this phone number. Reply with 'CONFIRM mandy'.
+        1234569 < An existing user Danae Mckay at GMC #1201 is already registered to this phone number. Reply with 'CONFIRM mandy-001'.
         
-        1234569 > CONFIRM mandy
+        1234569 > CONFIRM mandy-001
         1234569 < 1234569 registered to Andy Mckay at GMC #1201.
         
         1234569 > JOIN 1201 Danae McKay

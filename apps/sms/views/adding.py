@@ -29,6 +29,10 @@ class MalawiNew(New):
                 "child is above 5 years. Please resend SMS with corrected "\
                 "age." % (self.form.clean.child.data, self.form.clean.dob.data.strftime("%m.%d.%Y"))
     
+    def post_process(self):
+        if self.form.clean.contact.data:
+            self.data.case.mobild = self.form.clean.contact
+    
     def error_already_exists(self):
         # malawi specific code
         return "You have attempted to register child #%s in %s GMC. However, this child already exists. If this is an error, please resend SMS with correct information. If this patient is new or a replacement, please use the EXIT command first, then re-register." % (self.form.clean.child.data, self.data.provider.clinic.name)

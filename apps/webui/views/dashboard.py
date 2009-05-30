@@ -32,7 +32,7 @@ def _zones(self):
         if self.root:
             data.insert(0, { "zone": zone, "name": "All (%s)" % self.root.name, "limit": "AND zone_id in (%s)"  % (",".join(ids))})
         else:
-            data.insert(0, { "zone": zone, "name": "All (National)", "limit": "" })
+            data.insert(0, { "zone": None, "name": "All (National)", "limit": "" })
     
     return data 
 
