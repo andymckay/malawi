@@ -126,7 +126,7 @@ class TestApp (TestScript):
         1234567 < No reason given must be one of: D (death), DM (death malnutrition), DO (dropout), M (mistake).
 
         1234567 > EXIT 70 1201 DM
-        1234567 < Thank you for informing us that Child #70 cancelled for at Salima GMC #1201 has dropped-out. Reason given: death of causes related to malnutrition.
+        1234567 < Thank you for informing us that Child #70 cancelled for at Salima GMC #1201 has exited program. Reason given: death of causes related to malnutrition.
         
         1234567 > NEW 70 1201 F 26082005 9999999
         1234567 < Thank you for registering child #70 in Salima GMC, female, age 45 months, born 26.08.2005, contact# 9999999. If there is a mistake, please use EXIT to cancel this registration and try again.

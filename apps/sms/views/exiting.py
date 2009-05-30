@@ -5,4 +5,4 @@ class MalawiExit(Exit):
         info = self.data.case.get_dictionary()
         info.update(self.data.case.provider.clinic.get_dictionary())
         info["reason"] = self.data.reason
-        return "Thank you for informing us that Child #%(ref_id)s cancelled for at %(name)s GMC #%(codename)s has dropped-out. Reason given: %(reason)s." % info
+        return "Thank you for informing us that Child #%(ref_id)s cancelled for at %(name)s GMC #%(codename)s has exited program. Reason given: %(reason)s." % info
