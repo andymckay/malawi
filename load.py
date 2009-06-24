@@ -31,7 +31,7 @@ class FakeMessage:
         self.peer = self.sender = number
         
     def respond(self, *args, **kw):
-        print args[0]
+        #print args[0]
 
 now = datetime.now()
 

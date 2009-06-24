@@ -12,6 +12,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     (r'^$', 'apps.webui.views.dashboard.view'),
+    (r'^background/$', 'django.views.generic.simple.direct_to_template', {'template': 'background.html'}),
     (r'^search/$', 'apps.webui.views.search.view'),
     (r'^zone/(?P<zone_id>\d+)/$', 'apps.webui.views.dashboard.view'),
     (r'^facility/(?P<facility_id>\d+)/$', 'apps.webui.views.dashboard.view'),

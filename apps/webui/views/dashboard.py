@@ -63,8 +63,9 @@ def _view(request, graphs, root):
     context["stunting"] = graphs.render(name="stunting", type=graphs.percentage_stunting, args=[])
     
     export = request.GET.get("export", None)
+    zone_limit = int(request.GET.get("zone_limit", 0))
     if export:
-        return _csv_export(context, export)
+        return _csv_export(context, export, zone_limit)
     
 
     context["lastmonth"] = _setup_last_month(context)
@@ -73,7 +74,7 @@ def _view(request, graphs, root):
     context["breadcrumbs"] = _add_breadcrumbs(root)
     return as_html(request, "dashboard.html", context)
 
-def _csv_export(context, export):
+def _csv_export(context, export, zone_limit):
     """ Did the user ask for a csv export? if so.... """
     if export == "all":
         exports = context.keys()
@@ -87,8 +88,13 @@ def _csv_export(context, export):
         data = context.get(export, None)
         header = False
         for row in data.data:
+            if zone_limit:
+                if not row["zone"]:
+                    continue
+                elif row["zone"].id != int(zone_limit):
+                    continue
             if not header:
-                csvrow = [export,] + ([datetime.fromtimestamp(float(f[0])/1000).date() for f in row["data"]])
+                csvrow = [export,] + ([datetime.fromtimestamp(float(f[0])/1000).strftime("%m/%d/%Y") for f in row["data"]])
                 csvio.writerow(csvrow)
                 header = True
 

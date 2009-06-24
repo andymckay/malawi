@@ -129,7 +129,7 @@ class TestApp (TestScript):
         1234567 < Thank you for informing us that Child #70 cancelled for at Salima GMC #1201 has exited program. Reason given: death of causes related to malnutrition.
         
         1234567 > NEW 70 1201 F 26082005 9999999
-        1234567 < Thank you for registering child #70 in Salima GMC, female, age 45 months, born 26.08.2005, contact# 9999999. If there is a mistake, please use EXIT to cancel this registration and try again.
+        1234567 < Thank you for registering child #70 in Salima GMC, female, age 46 months, born 26.08.2005, contact# 9999999. If there is a mistake, please use EXIT to cancel this registration and try again.
         
         # need to check this goes on the new child
         1234567 > REPORT 70 5.2 95.5 13.5 N Y
@@ -168,4 +168,9 @@ class TestApp (TestScript):
     test_06_diarrhea = """
         1234567 > REPORT 70 5.2 95.5 13.5 N Y
         1234567 < Thank you Mariam Coulibaly for reporting child #70, weight = 5.2 kg, height = 95.5 cm, MUAC = 13.5 cm, no oedema, yes diarrhea. This child has severe acute malnutrition. Please refer to a clinician immediately for admission into the NRU/TFP. This child also has persistent diarrhea.
+    """
+    
+    test_07_help = """
+        1234567 > help
+        1234567 < To register yourself, SMS the following:  JOIN LastName FirstName Username To register a child, SMS the following:  NEW Child# GMC# gender DOB contact# To record information on an existing child, SMS the following:  Child# GMC# weight height muac oedema diarrhea
     """

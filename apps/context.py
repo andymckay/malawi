@@ -13,6 +13,7 @@ def processor(self):
         tabs.append({ "link": "/hsa/", "title": "HSA"})
     if has_roles(user, ["partner", "national", "district"]):
         tabs.append({ "link": "/setup/", "title": "Setup"})
+    tabs.append({ "link": "/background/", "title": "Background"})
     context = {
         "site": { "title": "Malawi",
                   "tabs": tabs },
