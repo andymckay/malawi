@@ -1930,5 +1930,17 @@
       "lat": null, 
       "codename": "162"
     }
+  },
+  {
+    "pk": 133, 
+    "model": "sms.facility", 
+    "fields": {
+      "name": "Chipoka", 
+      "zone": 42, 
+      "lon": null, 
+      "role": 1, 
+      "lat": null, 
+      "codename": "163"
+    }
   }
 ]

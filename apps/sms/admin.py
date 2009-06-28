@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from models.base import Zone, Facility, Case, Provider, MessageLog
+from models.base import Zone, Facility, Case, Provider, MessageLog, ReportMalnutrition
 from models.profile import Profile
 
 class CaseAdmin(admin.ModelAdmin):
@@ -22,3 +22,4 @@ class ZoneAdmin(admin.ModelAdmin):
 
 admin.site.register(Zone, ZoneAdmin)
 admin.site.register(Profile)
+admin.site.register(ReportMalnutrition)

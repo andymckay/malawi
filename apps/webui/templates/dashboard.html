@@ -27,9 +27,12 @@
 {% endif %}
 <h2>Export All Data</h2>
 {% for zone in zones %}
-<a href="?export=all&amp;zone_limit={{ zone.id }}">{{ zone.name }}</a><br />
+<a href="?format_1=csv&amp;zone_limit={{ zone.id }}">{{ zone.name }}</a><br />
 {% endfor %}
-<p><a href="?export=all">Export all graph data</a></p>
+{% for facility in facilities %}
+<a href="?format_1=csv&amp;facility_limit={{ facility.id }}">{{ facility.name }}</a><br />
+{% endfor %}
+<p><a href="?format_1=csv">Export all graph data</a></p>
 {% endblock %}
 
 {% block content %}
@@ -88,7 +91,10 @@
 {{ diarrhea.javascript|safe }}
 <p><a href="?export=diarrhea">Export graph data</a></p> 
 
+<h2>All reports</h2>
+{{ tables.reports|safe }}
 
+<h2>Map</h2>
 <p id="map" class="span-20" style="height: 400px" />
 <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key={{ settings.GOOGLE_MAPS_API_KEY }}" type="text/javascript"></script>
 <script type="text/javascript">

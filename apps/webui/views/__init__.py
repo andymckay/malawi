@@ -20,6 +20,8 @@ register("reports", ReportMalnutrition, [
     ["GMC", "case__provider__clinic__name", "{{ object.case.provider.clinic.name }}"],
     ["HSA", "case__provider__mobile", "{{ object.case.provider }}"],
     ["Child#", "case__ref_id", "{{ object.case.ref_id }}"],
+    ["Gender", "case__gender", "{{ object.case.gender }}"],
+    ["Age (months)", "case__dob", "{{ object.case.get_dictionary.raw_months }}"],
     ["Height", "height", "{{ object.height }}"],
     ["Weight", "weight", "{{ object.weight }}"],
     ["MUAC", "muac", "{{ object.muac }}"],

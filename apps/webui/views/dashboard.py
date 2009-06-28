@@ -14,6 +14,8 @@ from malnutrition.ui.views.shortcuts import as_html
 from malnutrition.utils.graph import Graphs
 from django.contrib.auth.decorators import login_required
 
+from reusable_table.table import get_dict
+
 def _zones(self):
     # this method, given a zone, sets up the sql appropriately for all the zones
     our_zones = Zone.objects.filter(self.zones)
@@ -34,6 +36,7 @@ def _zones(self):
         else:
             data.insert(0, { "zone": None, "name": "All (National)", "limit": "" })
     
+    self._zones_all_ids = ids
     return data 
 
 def _facilities(self):
@@ -49,12 +52,18 @@ def _facilities(self):
     if len(ids) > 1:
         data.insert(0, { "zone": facility, "name": "All (%s)" % self.root.name, "limit": "AND facility_id in (%s)"  % (",".join(ids))})
 
+    self._facilities_all_ids = ids
     return data
 
 def _view(request, graphs, root):
     """ Assemble the graphs and bits the user wants """
     context = {}
 
+    nonhtml, tables = _setup_tables(request, graphs)
+    context["tables"] = tables
+    if nonhtml:
+        return nonhtml
+        
     context["message"] = graphs.render(name="message", type=graphs.count, args=[])
     context["severe"] = graphs.render(name="severe", type=graphs.percentage_status, args=[2,3])
     context["moderate"] = graphs.render(name="moderate", type=graphs.percentage_status, args=[1,])
@@ -62,49 +71,39 @@ def _view(request, graphs, root):
     context["diarrhea"] = graphs.render(name="diarrhea", type=graphs.percentage_observation, args=[3,])
     context["stunting"] = graphs.render(name="stunting", type=graphs.percentage_stunting, args=[])
     
-    export = request.GET.get("export", None)
-    zone_limit = int(request.GET.get("zone_limit", 0))
-    if export:
-        return _csv_export(context, export, zone_limit)
-    
-
     context["lastmonth"] = _setup_last_month(context)
     context["filter"], context["zones"] = _setup_zones_filter(request, graphs.zones_unfiltered)
     context["facilities"] = _setup_facility_filter(graphs.facilities)
     context["breadcrumbs"] = _add_breadcrumbs(root)
+
     return as_html(request, "dashboard.html", context)
 
-def _csv_export(context, export, zone_limit):
-    """ Did the user ask for a csv export? if so.... """
-    if export == "all":
-        exports = context.keys()
-    else:
-        exports = [export,]
-        
-    output = StringIO.StringIO()
-    csvio = csv.writer(output)
-        
-    for export in exports:
-        data = context.get(export, None)
-        header = False
-        for row in data.data:
-            if zone_limit:
-                if not row["zone"]:
-                    continue
-                elif row["zone"].id != int(zone_limit):
-                    continue
-            if not header:
-                csvrow = [export,] + ([datetime.fromtimestamp(float(f[0])/1000).strftime("%m/%d/%Y") for f in row["data"]])
-                csvio.writerow(csvrow)
-                header = True
-
-            csvrow = [row["name"], ] + [f[1] for f in row["data"]]
-            csvio.writerow(csvrow)
-        
-    response = HttpResponse(mimetype='text/csv')
-    response['Content-Disposition'] = 'attachment; filename=report.csv'    
-    response.write(output.getvalue())
-    return response
+def _setup_tables(request, graphs):    
+    get_child_ids = getattr(graphs.root, "get_child_ids", None)
+    if get_child_ids:
+        get_child_ids = get_child_ids()
+    
+    zone_filtr = int(request.GET.get("zone_limit", 0))
+    facility_filtr = int(request.GET.get("facility_limit", 0))
+    if not graphs.root:
+        q = Q()
+    elif graphs.facilities and not get_child_ids:
+        ids = [ f.id for f in Facility.objects.filter(graphs.facilities) ]
+        if facility_filtr and facility_filtr in ids:
+            q = Q(case__facility__in=[facility_filtr,])
+        else:
+            q = Q(case__facility__in=ids)
+    elif graphs.zones_unfiltered:
+        ids = [ z.id for z in Zone.objects.filter(graphs.zones_unfiltered) ]
+        if zone_filtr and zone_filtr in ids:
+            q = Q(case__zone__in=[zone_filtr,])
+        else:
+            q = Q(case__zone__in=ids)
+    
+    nonhtml, tables = get_dict(request, [
+        ["reports", q],
+    ])
+    return nonhtml, tables
 
 def _setup_last_month(context):
     """ Given the graphs, set up the table of the last month data """
@@ -153,8 +152,8 @@ def _add_breadcrumbs(root):
     if root and hasattr(root, "parent"):
         while current.parent():
             current = current.parent()
-            breadcrumbs.insert(1, {"link": root.get_absolute_url(), "title": current.name })
-        breadcrumbs.append({"link": root.get_absolute_url(), "title": root.name })
+            breadcrumbs.insert(1, {"link": current.get_filter_url(), "title": current.name })
+        breadcrumbs.append({"link": root.get_filter_url(), "title": root.name })
     return breadcrumbs
 
 @login_required

@@ -46,37 +46,44 @@ for row in reader:
 
 reader = csv.reader(open('migration/data/migrate-children.csv', 'r'))
 for row in reader:
-    fac = models.Facility.objects.get(id=65)
+    provider = Provider.objects.get(id=int(row[4]))
+    fac = models.Facility.objects.get(id=row[-2])
+    existing = models.Case.objects.filter(ref_id=int(row[0]), active=True, provider=provider)
+    for record in existing:
+        record.active = False
+        record.save()
+        print "Found duplicate case, setting inactive"
     if row[1]:
         dob = datetime.strptime(row[1], "%Y-%m-%d %H:%M:%S").date()
         case = Case()
+        case.id = row[-1]
         case.gender = row[2].upper()
         case.ref_id = int(row[0])
         case.dob = dob
         case.mobile = row[3]
-        provider = Provider.objects.get(id=int(row[4]))
+        case.active = True
         case.provider = provider
-        # since there's only one clinic
         provider.clinic = fac
         provider.save()
         #case.village = models.Facility.objects.get(id=65) # this is the only one we have 
         case.facility = fac
-        case.zone = models.Zone.objects.get(id=44)
+        case.zone = fac.zone
+        case.created_at = case.updated_at = datetime.now()
         case.save()
     else:
         print "Ignoring due to bad date", row[0]
-
 
 reader = csv.reader(open('migration/data/migrate-reports.csv', 'r'))
 for row in reader:
     report = models.ReportMalnutrition()
     report.provider = models.Provider.objects.get(id=int(row[0]))
     try:
-        report.case = models.Case.objects.get(ref_id=int(row[1]))
+        report.case = models.Case.objects.get(id=int(row[-1]))
     except models.Case.DoesNotExist:
+        print "ignoring due to case.doesnotexist"
         continue
     report.weight = float(row[2])
-    report.height = float(row[3])
+    report.height = float(row[3]) * 10
     if row[4]:
         report.muac = int(float(row[4]) * 10)
     report.save()
